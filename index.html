@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistentul 18th Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="initial-load">
+    <!-- Background -->
+    <div class="bg"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- ===== Home View ===== -->
+    <div class="container">
+        <div class="view active" id="homeView">
+            <div class="hero">
+                <h1 class="title">
+                    <span class="brand">18<span class="th">th</span> Web</span> este aici pentru tine. Bine ai venit!
+                </h1>
+                <p class="subtitle">
+                    Cu ce te putem ajuta? <span class="wave">👋</span>
+                </p>
+            </div>
+
+            <div class="cards">
+                <a class="card" onclick="showGallery()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon1.png" alt="Locatii Poze">
+                    <span class="label">Locații Poze</span>
+                    <span class="desc">Aici sunt toate locațiile pozelor pentru quest.</span>
+                </a>
+                <a class="card" onclick="showStunts()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon2.png" alt="Viteze Stunts">
+                    <span class="label">Viteze Stunts</span>
+                    <span class="desc">Valorile sunt orientative și pot varia în funcție de execuția stunt-ului.</span>
+                </a>
+                <a class="card" onclick="showTickets()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon3.png" alt="Informatii Skin Tickets">
+                    <span class="label">Informații Skin Tickets</span>
+                    <span class="desc">Tot ce trebuie să știi despre Skin Tickets și ce oferă fiecare ticket in
+                        parte.</span>
+                </a>
+                <a class="card" onclick="showCoffers()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon4.png" alt="Informatii despre Hunter's / Fisherman's Coffer">
+                    <span class="label">Informații despre Hunter's / Fisherman's Coffer</span>
+                    <span class="desc">Aici găsiți lista completă a premiilor disponibile pentru fiecare Coffer.</span>
+                </a>
+                <a class="card" onclick="showSpecialDrops()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon5.png" alt="Locații Special Drops">
+                    <span class="label">Locații Special Drops</span>
+                    <span class="desc">Locațiile prezente aici sunt doar o parte dintre cele în care pot apărea Special
+                        Drops.</span>
+                </a>
+                <a class="card" onclick="showBringTheSummer()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon6.png" alt="Locații Bring The Summer">
+                    <span class="label">Locații Bring The Summer</span>
+                    <span class="desc">Locațiile reprezintă pozițiile NPC-urilor cărora trebuie să le oferi berea.</span>
+                </a>
+            </div>
+
+            <div class="footer">
+                18th Web &copy; 2026 - Acesta este un "Work In Progress". 
+            </div>
+        </div>
+
+        <!-- ===== Gallery View ===== -->
+        <div class="view" id="galleryView">
+            <div class="gallery-header">
+                <h2>Locatii Poze <span class="count">(33 imagini)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+
+        <!-- ===== Special Drops View ===== -->
+        <div class="view" id="specialDropsView">
+            <div class="gallery-header">
+                <h2>Locații Special Drops <span class="count">(1 imagine)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">📌Pentru Special Drops, folosiți /sett 0 și /setw clear pentru o vizualizare
+                mai bună a obiectelor.</div>
+            <div class="gallery-grid" id="specialDropsGrid"></div>
+        </div>
+
+        <!-- ===== Bring The Summer View ===== -->
+        <div class="view" id="bringTheSummerView">
+            <div class="gallery-header">
+                <h2>Locații Bring The Summer <span class="count">(1 imagine)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">📌Pentru Bring The Summer, folosiți /sett 0 și /setw clear pentru o vizualizare
+                mai bună a obiectelor.</div>
+            <div class="gallery-grid" id="bringTheSummerGrid"></div>
+        </div>
+
+        <!-- ===== Skin Tickets View ===== -->
+        <div class="view" id="ticketsView">
+            <div class="gallery-header">
+                <h2>Informații Skin Tickets <span class="count">(21 tickete)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="tickets-grid" id="ticketsGrid"></div>
+        </div>
+
+        <!-- ===== Ticket Detail View ===== -->
+        <div class="view" id="ticketDetailView">
+            <div class="gallery-header">
+                <h2 id="ticketDetailTitle">Ticket</h2>
+                <button class="back-btn" onclick="showTickets()">← Înapoi</button>
+            </div>
+            <div class="ticket-detail" id="ticketDetail"></div>
+        </div>
+
+        <!-- ===== Stunts View ===== -->
+        <div class="view" id="stuntsView">
+            <div class="gallery-header">
+                <h2>Viteze Stunts</h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="stunts-container" id="stuntsContainer"></div>
+        </div>
+
+        <!-- ===== Coffers View ===== -->
+        <div class="view" id="coffersView">
+            <div class="gallery-header">
+                <h2>Informații Coffers</h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="coffers-grid" id="coffersGrid"></div>
+        </div>
+
+        <!-- ===== Coffer Detail View ===== -->
+        <div class="view" id="cofferDetailView">
+            <div class="gallery-header">
+                <h2 id="cofferTitle">Coffer</h2>
+                <button class="back-btn" onclick="showCoffers()">← Înapoi</button>
+            </div>
+            <div class="coffer-detail" id="cofferDetail"></div>
+        </div>
+    </div>
+
+    <!-- ===== Lightbox ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="close-lightbox" onclick="closeLightbox(event)">×</span>
+        <div class="lightbox-stage" id="lightboxStage">
+            <img id="lightboxImg" src="" alt="Imagine mărită" draggable="false">
+        </div>
+        <div class="lightbox-controls" onclick="event.stopPropagation()">
+            <button class="zoom-btn" onclick="zoomLightbox(-1)" title="Micșorează">−</button>
+            <span class="zoom-level" id="zoomLevel">100%</span>
+            <button class="zoom-btn" onclick="zoomLightbox(1)" title="Mărește">+</button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Resetează">⟲</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== Initial load animation =====
+        window.addEventListener('load', function () {
+            // Remove the initial-load class after the staggered animations finish
+            // (longest delay: 1.8s + 1s duration = 2.8s)
+            setTimeout(function () {
+                document.body.classList.remove('initial-load');
+            }, 2900);
+        });
+
+        // ===== Floating particles =====
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 6 + 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // ===== Gallery =====
+        const TOTAL_IMAGES = 33;
+        const TOTAL_REAL_IMAGES = 33;
+        const PLACEHOLDER_IMG = 'img/backgound.png';
+
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        function getImageSrc(index) {
+            if (index <= TOTAL_REAL_IMAGES) {
+                return 'img/poza' + index + '.png';
+            }
+            return PLACEHOLDER_IMG;
+        }
+
+        // Generate 33 gallery items
+        for (let i = 1; i <= TOTAL_IMAGES; i++) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <span class="num">${i}</span>
+                <img src="${getImageSrc(i)}" alt="Imagine ${i}" loading="lazy">
+            `;
+            item.addEventListener('click', function () {
+                openLightbox(getImageSrc(i), i);
+            });
+            galleryGrid.appendChild(item);
+        }
+
+        // ===== Special Drops =====
+        const specialDropsGrid = document.getElementById('specialDropsGrid');
+
+        // Generate Special Drops gallery
+        const specialDropImages = [
+            {
+                src: 'img/misc/summer2.png',
+                alt: 'Special Drop'
+            }
+        ];
+
+        specialDropImages.forEach(function (drop, index) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <span class="num">${index + 1}</span>
+                <img src="${drop.src}" alt="${drop.alt}" loading="lazy">
+            `;
+            item.addEventListener('click', function () {
+                openLightbox(drop.src, index + 1);
+            });
+            specialDropsGrid.appendChild(item);
+        });
+
+        // ===== Bring The Summer =====
+        const bringTheSummerGrid = document.getElementById('bringTheSummerGrid');
+
+        // Generate Bring The Summer gallery
+        const bringTheSummerImages = [
+            {
+                src: 'img/misc/summer1.png',
+                alt: 'Bring The Summer'
+            }
+        ];
+
+        bringTheSummerImages.forEach(function (drop, index) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <span class="num">${index + 1}</span>
+                <img src="${drop.src}" alt="${drop.alt}" loading="lazy">
+            `;
+            item.addEventListener('click', function () {
+                openLightbox(drop.src, index + 1);
+            });
+            bringTheSummerGrid.appendChild(item);
+        });
+
+        // ===== View navigation =====
+        const homeView = document.getElementById('homeView');
+        const galleryView = document.getElementById('galleryView');
+        const specialDropsView = document.getElementById('specialDropsView');
+        const bringTheSummerView = document.getElementById('bringTheSummerView');
+        const ticketsView = document.getElementById('ticketsView');
+        const ticketDetailView = document.getElementById('ticketDetailView');
+        const stuntsView = document.getElementById('stuntsView');
+        const coffersView = document.getElementById('coffersView');
+        const cofferDetailView = document.getElementById('cofferDetailView');
+
+        function showView(view) {
+            // Find the currently active view
+            const currentView = [homeView, galleryView, specialDropsView, bringTheSummerView, ticketsView, ticketDetailView, stuntsView, coffersView, cofferDetailView].find(function (v) {
+                return v.classList.contains('active');
+            });
+
+            // If there's a current view and it's not the target, fade it out first
+            if (currentView && currentView !== view) {
+                currentView.classList.add('closing');
+                setTimeout(function () {
+                    currentView.classList.remove('active');
+                    currentView.classList.remove('closing');
+                    view.classList.add('active');
+                }, 300);
+            } else {
+                view.classList.add('active');
+            }
+        }
+
+        function showGallery() {
+            showView(galleryView);
+        }
+
+        function showSpecialDrops() {
+            showView(specialDropsView);
+        }
+
+        function showBringTheSummer() {
+            showView(bringTheSummerView);
+        }
+
+        function showTickets() {
+            showView(ticketsView);
+        }
+
+        function showTicketDetail() {
+            showView(ticketDetailView);
+        }
+
+        function showStunts() {
+            showView(stuntsView);
+        }
+
+        function showCoffers() {
+            showView(coffersView);
+        }
+
+        function showCofferDetail() {
+            showView(cofferDetailView);
+        }
+
+        function showHome() {
+            showView(homeView);
+        }
+
+        // ===== Skin Tickets =====
+        const TICKETS = [
+            {
+                id: 'rare',
+                title: 'Rare Ticket',
+                icon: 'img/tickets/rare-tick.png',
+                color: '#3061FF',
+                description: '5% job boost'
+            },
+            {
+                id: 'epic',
+                title: 'Epic Ticket',
+                icon: 'img/tickets/epic-tick.png',
+                color: '#B030FF',
+                description: '7% job boost, +1 \'Respect Point\' la \'Payday\''
+            },
+            {
+                id: 'legendary',
+                title: 'Legendary Ticket',
+                icon: 'img/tickets/legendary-tick.png',
+                color: '#FBDE41',
+                description: '10% job boost, +1 \'Respect Point\' și $500 în plus la \'Payday\''
+            },
+            {
+                id: '7th-anniversary',
+                title: '7th Anniversary Ticket',
+                icon: 'img/tickets/7-aniversar-tick.png',
+                color: '#EEDF15',
+                description: '45% job boost, timp necesar la \'Payday\' pentru [/getgift] înjumătățit (900s, in loc de 1800s) și +1 \'Premium Point\' la \'Payday\''
+            },
+            {
+                id: 'autumn',
+                title: 'Autumn Ticket',
+                icon: 'img/tickets/autumn-tick.png',
+                color: '#FF8B20',
+                description: '30% job boost, +2 \'Respect Points\' la \'Payday\' și 1 Free Spin / zi (la 2700+ secunde), altfel doar +2 \'Respect Points\' la \'Payday\''
+            },
+            {
+                id: 'autumn-v2',
+                title: 'Autumn V2 Ticket',
+                icon: 'img/tickets/autumn-2-tick.png',
+                color: '#F36500',
+                description: '+25% XP la Farmer, +50% capacitate de transport apă și +30% capacitate de transport pesticide'
+            },
+            {
+                id: 'cupidon',
+                title: 'Cupidon Ticket',
+                icon: 'img/tickets/cupidon-tick.png',
+                color: '#E4567A',
+                description: '15% șansă de a primi 2x minereuri / pești la joburile \'Miner\' și \'Industrial Fisherman\''
+            },
+            {
+                id: 'cupidon-v2',
+                title: 'Cupidon V2 Ticket',
+                icon: 'img/tickets/cupidon-2-tick.png',
+                color: '#E31467',
+                description: '40% Job boost și 1 \'B-Point\' pentru fiecare $1.250 din bacșiș la \'Curier & Pizza\' sau 1 \'B-Point\' pentru fiecare $2.500 de la pasagerii de la \'Bus Driver\' sau 5 \'B-Points\' pentru fiecare gunoi colectat'
+            },
+            {
+                id: 'cupidon-v3',
+                title: 'Cupidon V3 Ticket',
+                icon: 'img/tickets/cupidon-3-tick.png',
+                color: '#D53154',
+                description: 'Vei primi cu 7% mai multi bani la toate rob-urile efectuate cu succes. Acesta ofera un punct de rob atunci cand efectuezi rob Yacht, doua puncte la rob \'ATM\', 3 puncte la rob \'Museum\' si 5 la efectuarea rob-ului \'Rob Heist\''
+            },
+            {
+                id: 'easter',
+                title: 'Easter Ticket',
+                icon: 'img/tickets/easter-tick.png',
+                color: '#BA65B6',
+                description: '10% șansă de a primi 2x minereuri / pești sau 3% șansă de a primi 3x minereuri / pești la job-urile \'Miner\' și \'Industrial Fisherman\''
+            },
+            {
+                id: 'easter-v3',
+                title: 'Easter V3 Ticket',
+                icon: 'img/tickets/easter-v3-skin-tic.png',
+                color: '#8BBD4C',
+                description: '20% șansă de 2x \'Premium Points\' obținute de la \'Alien\' (Hunter), 33% șansă să primești dublu iteme sau 5% șansă să primești triplu iteme cand lootezi un animal la jobul \'Hunter\''
+            },
+            {
+                id: 'halloween',
+                title: 'Halloween Ticket',
+                icon: 'img/tickets/hallow-tick.png',
+                color: '#A5462E',
+                description: '35% Job boost și 1 \'B-Point\' pentru fiecare $25.000 munciți (mai puțin la Miner, Hunter, și Industrial Fisherman)'
+            },
+            {
+                id: 'spring',
+                title: 'Spring Ticket',
+                icon: 'img/tickets/spring-tick.png',
+                color: '#8B943B',
+                description: '15% job boost, +69 \'B-Points\' și +3 \'Respect Points\' la \'Payday\' (la 2696+ secunde), altfel +15 \'B-Points\' și +1 \'Respect Point\''
+            },
+            {
+                id: 'spring-v2',
+                title: 'Spring V2 Ticket',
+                icon: 'img/tickets/spring-2-tick.png',
+                color: '#88DB14',
+                description: '+1 \'Rob Point\' in plus la Payday, respectiv 1 \'Free Point\' ca politist și cu 50% mai multe materiale la \'Arms Dealer\''
+            },
+            {
+                id: 'summer-fest',
+                title: 'Summer Fest Ticket',
+                icon: 'img/tickets/summer-fest-tick.png',
+                color: '#FFB652',
+                description: '+6 \'Premium Points\', +200 \'B-Points\' și +4 \'Respect Points\' la \'Payday\' (la 1801+ secunde), altfel +2 \'Premium Points\', +50 \'B-Points\' și +2 \'Respect Points\''
+            },
+            {
+                id: 'summer',
+                title: 'Summer Ticket',
+                icon: 'img/tickets/summer-tick.png',
+                color: '#60BCDA',
+                description: '+3 \'Respect Points\', +1 \'Premium Point\' și $5.000 în plus la \'Payday\' (sub 1800 secunde) sau +2 \'Premium Points\' (la 1801+ secunde) la \'Payday\''
+            },
+            {
+                id: 'winter',
+                title: 'Winter Ticket',
+                icon: 'img/tickets/winter-tick.png',
+                color: '#5FB6E0',
+                description: '15% job boost, +50 B-Points și $1,000 în plus la \'Payday\' (la 1801+ secunde), altfel +25 \'B-Points\' și $500 în plus'
+            },
+            {
+                id: 'winter-v2',
+                title: 'Winter V2 Ticket',
+                icon: 'img/tickets/winter-v2-tick.png',
+                color: '#295AC3',
+                description: '15% sanșă de 2x \'Premium Points\' obținute de la \'Alien\' (Hunter) și 33% șansă de a primi 2x minereuri / pești sau 5% șansă de a primi 3x minereuri / pești la job-urile \'Miner\' și \'Industrial Fisherman\''
+            },
+            {
+                id: 'winter-v3',
+                title: 'Winter V3 Ticket',
+                icon: 'img/tickets/winter3-tick.png',
+                color: '#8066AA',
+                description: '+25% Boost la Blood & Gold, Daily Quests, Stunts, Drift Zones, Repo Work'
+            },
+            {
+                id: 'worker',
+                title: 'Worker Ticket',
+                icon: 'img/tickets/worker-tick.png',
+                color: '#F7B500',
+                description: '20% job boost, 25% șansă de a primi dublu materiale și 10% șansă de a primi triplu materiale la job-ul \'Arms Dealer\''
+            },
+            {
+                id: 'xmas',
+                title: 'xMas Ticket',
+                icon: 'img/tickets/xmas-tick.png',
+                color: '#FF0000',
+                description: '3 puncte premium, 2 puncte de respect, 100 \'B-Points\' (la 1801+ secunde), altfel 1 punct premium, 1 punct de respect, 25 \'B-Points\' (sub 1801 secunde)'
+            }
+        ];
+
+        const ticketsGrid = document.getElementById('ticketsGrid');
+        const ticketDetailTitle = document.getElementById('ticketDetailTitle');
+        const ticketDetail = document.getElementById('ticketDetail');
+
+        // Generate ticket cards
+        TICKETS.forEach(function (ticket) {
+            const item = document.createElement('div');
+            item.className = 'ticket-card';
+            item.innerHTML = `
+                <img class="ticket-icon" src="${ticket.icon}" alt="${ticket.title}">
+                <span class="ticket-name" style="color: ${ticket.color}">${ticket.title}</span>
+                <span class="ticket-arrow">→</span>
+            `;
+            item.addEventListener('click', function () {
+                openTicketDetail(ticket);
+            });
+            ticketsGrid.appendChild(item);
+        });
+
+        function openTicketDetail(ticket) {
+            ticketDetailTitle.textContent = ticket.title;
+            let html = `
+                <div class="ticket-hero">
+                    <img src="${ticket.icon}" alt="${ticket.title}">
+                    <h3 style="color: ${ticket.color}">${ticket.title}</h3>
+                </div>
+                <div class="ticket-info">
+                    <p>${ticket.description}</p>
+                </div>
+            `;
+            ticketDetail.innerHTML = html;
+            showTicketDetail();
+        }
+
+        // ===== Stunts =====
+        const STUNTS = [
+            { num: 1, speed: '125 km/h' },
+            { num: 2, speed: '120 km/h' },
+            { num: 3, speed: '105 km/h' },
+            { num: 4, speed: '120 km/h' },
+            { num: 5, speed: '115 km/h' },
+            { num: 6, speed: '115 - 120 km/h' },
+            { num: 7, speed: '130 km/h' },
+            { num: 8, speed: '130 km/h' },
+            { num: 9, speed: '140 km/h' },
+            { num: 10, speed: '80 km/h' },
+            { num: 11, speed: '130 km/h' },
+            { num: 12, speed: '125 km/h' },
+            { num: 13, speed: '130 km/h' },
+            { num: 14, speed: '140 km/h' },
+            { num: 15, speed: '135 km/h' },
+            { num: 16, speed: '130 km/h' },
+            { num: 17, speed: '120 km/h' },
+            { num: 18, speed: '100 km/h' },
+            { num: 19, speed: '140 km/h' },
+            { num: 20, speed: '90 km/h' },
+            { num: 21, speed: '185 km/h' },
+            { num: 22, speed: '135 km/h' },
+            { num: 23, speed: '150 km/h' },
+            { num: 24, speed: '90 km/h' },
+            { num: 25, speed: '165 - 170 km/h' },
+            { num: 26, speed: '90 km/h' },
+            { num: 27, speed: '140 km/h' },
+            { num: 28, speed: '120 km/h' },
+            { num: 29, speed: '155 km/h' },
+            { num: 30, speed: '120 km/h' },
+            { num: 31, speed: '130 km/h' },
+            { num: 32, speed: '110 km/h' },
+            { num: 33, speed: '110 km/h' },
+            { num: 34, speed: '135 km/h' },
+            { num: 35, speed: '110 km/h' },
+            { num: 36, speed: '110 km/h' },
+            { num: 37, speed: '140 km/h' },
+            { num: 38, speed: '80 km/h' },
+            { num: 39, speed: '110 km/h' },
+            { num: 41, speed: '160 km/h' },
+            { num: 42, speed: '95 km/h' },
+            { num: 43, speed: '120 km/h' },
+            { num: 44, speed: '180 km/h' },
+            { num: 45, speed: '170 km/h' },
+            { num: 46, speed: '135 km/h' },
+            { num: 47, speed: '90 - 105 km/h' },
+            { num: 48, speed: '125 km/h' },
+            { num: 49, speed: '120 km/h' },
+            { num: 50, speed: '100 km/h' },
+            { num: 51, speed: '95 km/h' },
+            { num: 52, speed: '120 km/h' },
+            { num: 53, speed: '170 km/h' },
+            { num: 54, speed: '110 km/h' },
+            { num: 55, speed: '135 km/h' },
+            { num: 56, speed: '110 km/h' },
+            { num: 57, speed: '110 km/h' }
+        ];
+
+        const stuntsContainer = document.getElementById('stuntsContainer');
+
+        // Generate stunt cards
+        STUNTS.forEach(function (stunt) {
+            const item = document.createElement('div');
+            item.className = 'stunt-card';
+            item.innerHTML = `
+                <span class="stunt-num">Stunt ${stunt.num}</span>
+                <span class="stunt-speed">${stunt.speed}</span>
+            `;
+            stuntsContainer.appendChild(item);
+        });
+
+        // ===== Coffers =====
+        const COFFERS = [
+            {
+                id: 'hunter-v1',
+                title: "Hunter's Coffer",
+                img: 'img/coffers/huntcofferv1.png',
+                rewards: [
+                    'Panther Fur (x100)',
+                    'Bear Fur (x100)',
+                    'Bear Fur (x300)',
+                    'Bear Fur (x500)',
+                    'Moonlight Crate (x3)',
+                    'SMG MK 2 (x1)',
+                    'Voucher Transcendent (x1)',
+                    'Voucher Divine (x1)',
+                    'Military Rifle (x1)',
+                    'Discount Obey RSQ Type 8 Mansory 10%',
+                    'Discount Pfister Carrera Type 911 Convertible 10%',
+                    'Discount Karin Spectra Mark 5 10%',
+                    'Discount Übermacht M Type 4 Race 10%',
+                    'Discount Benefactor AMG1 10%',
+                    'Discount Grotti Portofino 20%',
+                    'Discount Grotti 40F 10%'
+                ]
+            },
+            {
+                id: 'hunter-v2',
+                title: "Hunter's Coffer V2",
+                img: 'img/coffers/huntcofferv2.png',
+                rewards: [
+                    'Panther Fur (x100)',
+                    'Bear Fur (x100)',
+                    'Bear Fur (x300)',
+                    'Bear Fur (x500)',
+                    'Moonlight Crate (x3)',
+                    'SMG MK2 (x1)',
+                    'Transcendent Voucher (x1)',
+                    'Divine Voucher (x1)',
+                    'Military Rifle (x1)',
+                    'Ticket Discount Übermacht Type E21 10%',
+                    'Ticket Discount Übermacht M Type 4 Race 10%',
+                    'Ticket Discount Annis Patrol18 10%',
+                    'Ticket Discount Pfister Carrera Type 911 Convertible 10%',
+                    'Ticket Discount Benefactor AMG1 10%',
+                    'Ticket Discount Enus Cognoscenti 10%',
+                    'Ticket Discount Ocelot Vijea 10%'
+                ]
+            },
+            {
+                id: 'fish-v1',
+                title: "Fisherman's Coffer",
+                img: 'img/coffers/fishcofferv1.png',
+                rewards: [
+                    'Licență Fishbot (10, 15 sau 25 de ore)',
+                    'Pure Pearl (x10)',
+                    'Spring Pearl (x10)',
+                    'Coral Pearl (x10)',
+                    'Azure Pearl (x10)',
+                    'Dawn Pearl (x10)',
+                    'Shell (x100)',
+                    'Transcendent Voucher (x1)',
+                    'Divine Voucher (x1)',
+                    'Ticket Discount Benefactor E Type 63B 50%',
+                    'Ticket Discount Annis Vista Spec 34 10%',
+                    'Ticket Discount Karin Spectra Spec 4 10%',
+                    'Ticket Discount Pegassi Urax 10%',
+                    'Ticket Discount Truffade Vayder 10%'
+                ]
+            },
+            {
+                id: 'fish-v2',
+                title: "Fisherman's Coffer V2",
+                img: 'img/coffers/fishcofferv2.png',
+                rewards: [
+                    'Licență Fishbot (10, 15 sau 25 de ore)',
+                    'Pure Pearl (x10)',
+                    'Spring Pearl (x10)',
+                    'Coral Pearl (x10)',
+                    'Azure Pearl (x10)',
+                    'Dawn Pearl (x10)',
+                    'Shell (x100)',
+                    'Transcendent Voucher (x1)',
+                    'Divine Voucher (x1)',
+                    'Ticket Discount Benefactor E Type 63B 50%',
+                    'Ticket Discount Karin Spectra Spec 4 10%',
+                    'Ticket Discount Übermacht Type e34 10%',
+                    'Ticket Discount Benefactor SEL600 10%',
+                    'Ticket Discount Grotti F50 10%',
+                    'Ticket Discount Pegassi Tempe STO21 10%'
+                ]
+            }
+        ];
+
+        const coffersGrid = document.getElementById('coffersGrid');
+        const cofferTitle = document.getElementById('cofferTitle');
+        const cofferDetail = document.getElementById('cofferDetail');
+
+        // Generate coffer cards
+        COFFERS.forEach(function (coffer) {
+            const item = document.createElement('div');
+            item.className = 'coffer-card';
+            item.innerHTML = `
+                <img src="${coffer.img}" alt="${coffer.title}">
+                <span class="coffer-name">${coffer.title}</span>
+            `;
+            item.addEventListener('click', function () {
+                openCofferDetail(coffer);
+            });
+            coffersGrid.appendChild(item);
+        });
+
+        function openCofferDetail(coffer) {
+            cofferTitle.textContent = coffer.title;
+            let html = `
+                <div class="coffer-hero">
+                    <img src="${coffer.img}" alt="${coffer.title}">
+                    <h3>${coffer.title}</h3>
+                    <span class="rewards-badge">Premii Disponibile</span>
+                </div>
+                <ul class="rewards-list">
+            `;
+            coffer.rewards.forEach(function (reward) {
+                html += `<li>${reward}</li>`;
+            });
+            html += '</ul>';
+            cofferDetail.innerHTML = html;
+            showCofferDetail();
+        }
+
+        // ===== Lightbox =====
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const zoomLevel = document.getElementById('zoomLevel');
+
+        let currentZoom = 1;
+        const MIN_ZOOM = 1;
+        const MAX_ZOOM = 4;
+        const ZOOM_STEP = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let suppressClick = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let startTranslateX = 0;
+        let startTranslateY = 0;
+        let clickTimer = null;
+        let lastTapTime = 0;
+        let tapMoved = false;
+        let tapStartX = 0;
+        let tapStartY = 0;
+        let suppressClickTimer = null;
+
+        function clearSuppressClick() {
+            if (suppressClickTimer) {
+                clearTimeout(suppressClickTimer);
+                suppressClickTimer = null;
+            }
+            suppressClick = false;
+        }
+
+        function setSuppressClick() {
+            suppressClick = true;
+            if (suppressClickTimer) {
+                clearTimeout(suppressClickTimer);
+            }
+            suppressClickTimer = setTimeout(function () {
+                suppressClickTimer = null;
+                suppressClick = false;
+            }, 500);
+        }
+
+        function openLightbox(src, index) {
+            lightboxImg.src = src;
+            lightboxImg.alt = 'Imagine ' + index;
+            clearSuppressClick();
+            lastTapTime = 0;
+            resetZoom();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+            resetZoom();
+        }
+
+        function applyZoom() {
+            lightboxImg.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + currentZoom + ')';
+            lightboxImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+            zoomLevel.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function clampTranslation() {
+            const maxOffset = (currentZoom - 1) * 300;
+            translateX = Math.max(-maxOffset, Math.min(maxOffset, translateX));
+            translateY = Math.max(-maxOffset, Math.min(maxOffset, translateY));
+        }
+
+        function zoomLightbox(direction) {
+            const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, currentZoom + direction * ZOOM_STEP));
+            if (newZoom === currentZoom) return;
+            currentZoom = newZoom;
+            clampTranslation();
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
+            applyZoom();
+        }
+
+        // Click on image to zoom in (cycles back to 1x at max)
+        lightboxImg.addEventListener('click', function (event) {
+            event.stopPropagation();
+            if (suppressClick) {
+                clearSuppressClick();
+                return;
+            }
+            if (clickTimer) {
+                clearTimeout(clickTimer);
+                clickTimer = null;
+                // This is the second click of a double-click → just reset zoom
+                return;
+            }
+            clickTimer = setTimeout(function () {
+                clickTimer = null;
+                if (currentZoom < MAX_ZOOM) {
+                    zoomLightbox(1);
+                } else {
+                    resetZoom();
+                }
+            }, 250);
+        });
+
+        // Double-click to reset zoom
+        lightboxImg.addEventListener('dblclick', function (event) {
+            event.stopPropagation();
+            if (clickTimer) {
+                clearTimeout(clickTimer);
+                clickTimer = null;
+            }
+            resetZoom();
+        });
+
+        // Scroll wheel to zoom
+        lightboxImg.addEventListener('wheel', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const direction = event.deltaY < 0 ? 1 : -1;
+            zoomLightbox(direction);
+        }, { passive: false });
+
+        // Mouse drag to pan
+        lightboxImg.addEventListener('mousedown', function (event) {
+            if (currentZoom <= 1) return;
+            event.preventDefault();
+            isDragging = true;
+            suppressClick = false;
+            dragStartX = event.clientX;
+            dragStartY = event.clientY;
+            startTranslateX = translateX;
+            startTranslateY = translateY;
+            lightboxImg.style.cursor = 'grabbing';
+            lightboxImg.classList.add('no-transition');
+        });
+
+        document.addEventListener('mousemove', function (event) {
+            if (!isDragging) return;
+            translateX = startTranslateX + (event.clientX - dragStartX);
+            translateY = startTranslateY + (event.clientY - dragStartY);
+            clampTranslation();
+            applyZoom();
+        });
+
+        document.addEventListener('mouseup', function (event) {
+            if (isDragging) {
+                isDragging = false;
+                const moved = Math.abs(event.clientX - dragStartX) + Math.abs(event.clientY - dragStartY);
+                if (moved > 8) {
+                    setSuppressClick();
+                }
+                lightboxImg.classList.remove('no-transition');
+                applyZoom();
+            }
+        });
+
+        // Touch support (pinch zoom + drag)
+        let touchStartDist = 0;
+        let touchStartZoom = 1;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTranslateX = 0;
+        let touchStartTranslateY = 0;
+
+        lightboxImg.addEventListener('touchstart', function (event) {
+            event.stopPropagation();
+            if (event.touches.length === 1) {
+                tapMoved = false;
+                tapStartX = event.touches[0].clientX;
+                tapStartY = event.touches[0].clientY;
+                if (currentZoom > 1) {
+                    isDragging = true;
+                    touchStartX = event.touches[0].clientX;
+                    touchStartY = event.touches[0].clientY;
+                    touchStartTranslateX = translateX;
+                    touchStartTranslateY = translateY;
+                    lightboxImg.classList.add('no-transition');
+                }
+            } else if (event.touches.length === 2) {
+                clearSuppressClick();
+                isDragging = false;
+                const dx = event.touches[0].clientX - event.touches[1].clientX;
+                const dy = event.touches[0].clientY - event.touches[1].clientY;
+                touchStartDist = Math.sqrt(dx * dx + dy * dy);
+                touchStartZoom = currentZoom;
+            }
+        }, { passive: true });
+
+        lightboxImg.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.touches.length === 1) {
+                if (Math.abs(event.touches[0].clientX - tapStartX) > 8 ||
+                    Math.abs(event.touches[0].clientY - tapStartY) > 8) {
+                    tapMoved = true;
+                }
+                if (isDragging) {
+                    translateX = touchStartTranslateX + (event.touches[0].clientX - touchStartX);
+                    translateY = touchStartTranslateY + (event.touches[0].clientY - touchStartY);
+                    clampTranslation();
+                    applyZoom();
+                }
+            } else if (event.touches.length === 2) {
+                tapMoved = true;
+                const dx = event.touches[0].clientX - event.touches[1].clientX;
+                const dy = event.touches[0].clientY - event.touches[1].clientY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (touchStartDist > 0) {
+                    currentZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, touchStartZoom * (dist / touchStartDist)));
+                    clampTranslation();
+                    applyZoom();
+                }
+            }
+        }, { passive: false });
+
+        lightboxImg.addEventListener('touchend', function (event) {
+            if (event.touches.length === 0) {
+                isDragging = false;
+                lightboxImg.classList.remove('no-transition');
+                applyZoom();
+
+                if (tapMoved) {
+                    setSuppressClick();
+                    return;
+                }
+
+                const now = Date.now();
+                if (now - lastTapTime < 300) {
+                    // Double tap → reset zoom
+                    setSuppressClick();
+                    lastTapTime = 0;
+                    resetZoom();
+                    return;
+                }
+                lastTapTime = now;
+
+                // Prevent the synthetic click event that follows from also zooming
+                setSuppressClick();
+
+                if (currentZoom < MAX_ZOOM) {
+                    zoomLightbox(1);
+                } else {
+                    resetZoom();
+                }
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+
+</html>
