@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistentul 18th Web</title>
+    <title>18th Web ⟡ Clan Hub</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
@@ -19,6 +20,37 @@
 
     <!-- Floating particles -->
     <div class="particles" id="particles"></div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" src="audio/soundtrack1.ogg" loop preload="auto"></audio>
+    <button class="music-btn theme-btn" id="themeBtn" onclick="toggleTheme()" title="Dark Mode">
+        <svg class="music-icon theme-icon" id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="music-icon theme-icon hidden" id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Mute/Unmute">
+        <svg class="music-icon" id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg class="music-icon hidden" id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </button>
 
     <!-- ===== Home View ===== -->
     <div class="container">
@@ -69,12 +101,25 @@
                     <span class="arrow">→</span>
                     <img class="icon" src="img/icons/icon6.png" alt="Locații Bring The Summer">
                     <span class="label">Locații Bring The Summer</span>
-                    <span class="desc">Locațiile reprezintă pozițiile NPC-urilor cărora trebuie să le oferi berea.</span>
+                    <span class="desc">Locațiile reprezintă pozițiile NPC-urilor cărora trebuie să le oferi
+                        berea.</span>
+                </a>
+                <a class="card" onclick="showPets()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon7.png" alt="Informatii Pets">
+                    <span class="label">Informații Pets</span>
+                    <span class="desc">Toate informațiile despre pets și beneficiile lor.</span>
+                </a>
+                <a class="card" onclick="showModpacks()">
+                    <span class="arrow">→</span>
+                    <img class="icon" src="img/icons/icon8.png" alt="Modpacks">
+                    <span class="label">Modpacks</span>
+                    <span class="desc">Descarcă modpacks-urile disponibile pentru o experiență îmbunătățită.</span>
                 </a>
             </div>
 
             <div class="footer">
-                18th Web &copy; 2026 - Acesta este un "Work In Progress". 
+                18th Web &copy; 2026 - Acesta este un "Work In Progress".
             </div>
         </div>
 
@@ -107,6 +152,15 @@
             <div class="gallery-grid" id="bringTheSummerGrid"></div>
         </div>
 
+        <!-- ===== Pets View ===== -->
+        <div class="view" id="petsView">
+            <div class="gallery-header">
+                <h2>Informații Pets <span class="count">(6 pets)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="pets-grid" id="petsGrid"></div>
+        </div>
+
         <!-- ===== Skin Tickets View ===== -->
         <div class="view" id="ticketsView">
             <div class="gallery-header">
@@ -131,6 +185,12 @@
                 <h2>Viteze Stunts</h2>
                 <button class="back-btn" onclick="showHome()">← Înapoi</button>
             </div>
+            <div class="specialdrops-note">📌<span class="note-warning">CITESTE:</span> Vitezele sunt orientative, NU exacte. Fiecare mașină se comportă
+                diferit, în special din cauza handling-ului, așa că viteza necesară poate varia de la un vehicul la
+                altul. Valorile afișate sunt DOAR un punct de referință pentru stunt și NU trebuie luate ca valori
+                fixe sau exacte. Dacă la voi funcționează o viteză puțin diferită, e perfect normal — nu înseamnă că
+                viteza afișată este greșită.
+                .</div>
             <div class="stunts-container" id="stuntsContainer"></div>
         </div>
 
@@ -151,6 +211,24 @@
             </div>
             <div class="coffer-detail" id="cofferDetail"></div>
         </div>
+
+        <!-- ===== Modpacks View ===== -->
+        <div class="view" id="modpacksView">
+            <div class="gallery-header">
+                <h2>Modpacks [SeraNNo's Workplace] <span class="count" id="modpacksCount"></span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="modpacks-grid" id="modpacksGrid"></div>
+        </div>
+
+        <!-- ===== Modpack Detail View ===== -->
+        <div class="view" id="modpackDetailView">
+            <div class="gallery-header">
+                <h2 id="modpackDetailTitle">Modpack</h2>
+                <button class="back-btn" onclick="showModpacks()">← Înapoi</button>
+            </div>
+            <div class="modpack-detail" id="modpackDetail"></div>
+        </div>
     </div>
 
     <!-- ===== Lightbox ===== -->
@@ -167,6 +245,9 @@
         </div>
     </div>
 
+    <script src="js/theme.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/modpacks.js"></script>
     <script>
         // ===== Initial load animation =====
         window.addEventListener('load', function () {
@@ -196,7 +277,7 @@
         // ===== Gallery =====
         const TOTAL_IMAGES = 33;
         const TOTAL_REAL_IMAGES = 33;
-        const PLACEHOLDER_IMG = 'img/backgound.png';
+        const PLACEHOLDER_IMG = 'img/backgrounds/backgound.png';
 
         const galleryGrid = document.getElementById('galleryGrid');
 
@@ -210,7 +291,8 @@
         // Generate 33 gallery items
         for (let i = 1; i <= TOTAL_IMAGES; i++) {
             const item = document.createElement('div');
-            item.className = 'gallery-item';
+            item.className = 'gallery-item stagger-in';
+            item.style.animationDelay = (i * 0.03) + 's';
             item.innerHTML = `
                 <span class="num">${i}</span>
                 <img src="${getImageSrc(i)}" alt="Imagine ${i}" loading="lazy">
@@ -234,7 +316,8 @@
 
         specialDropImages.forEach(function (drop, index) {
             const item = document.createElement('div');
-            item.className = 'gallery-item';
+            item.className = 'gallery-item stagger-in';
+            item.style.animationDelay = (index * 0.05) + 's';
             item.innerHTML = `
                 <span class="num">${index + 1}</span>
                 <img src="${drop.src}" alt="${drop.alt}" loading="lazy">
@@ -258,7 +341,8 @@
 
         bringTheSummerImages.forEach(function (drop, index) {
             const item = document.createElement('div');
-            item.className = 'gallery-item';
+            item.className = 'gallery-item stagger-in';
+            item.style.animationDelay = (index * 0.05) + 's';
             item.innerHTML = `
                 <span class="num">${index + 1}</span>
                 <img src="${drop.src}" alt="${drop.alt}" loading="lazy">
@@ -269,30 +353,109 @@
             bringTheSummerGrid.appendChild(item);
         });
 
+        // ===== Pets =====
+        const PETS = [
+            {
+                name: 'Parrot',
+                icon: 'img/pets/Parrot.png',
+                benefits: 'Acest Pet nu oferă beneficii',
+                obtain: 'Spring Shop (2026)'
+            },
+            {
+                name: 'Lovely Bunny',
+                icon: 'img/pets/Lovely-Bunny.png',
+                benefits: '1 Premium Point per PayDay',
+                obtain: 'Easter V4 Crate'
+            },
+            {
+                name: 'Kuruni',
+                icon: 'img/pets/Kuruni.png',
+                benefits: '10% Rob Boost',
+                obtain: 'Easter Crate V4'
+            },
+            {
+                name: 'Fluffy Bunny',
+                icon: 'img/pets/Fluffy-bunny.png',
+                benefits: '1 Free Spin la PayDay (la 3550+ secunde)',
+                obtain: 'Spring Shop (2026)'
+            },
+            {
+                name: 'Evil Bunny',
+                icon: 'img/pets/Evil-bunny.png',
+                benefits: '+1 Rob Point/Free Point la PayDay (dacă nu deții deja limita maximă)',
+                obtain: 'Spring Shop (2026)'
+            },
+            {
+                name: 'Easter Bunny',
+                icon: 'img/pets/Easter-Bunny.png',
+                benefits: '10% Job Boost',
+                obtain: 'Easter V4 Crate'
+            }
+        ];
+
+        const petsGrid = document.getElementById('petsGrid');
+
+        // Generate pet cards
+        PETS.forEach(function (pet, index) {
+            const item = document.createElement('div');
+            item.className = 'pet-card stagger-in';
+            item.style.animationDelay = (index * 0.08) + 's';
+            item.innerHTML = `
+                <div class="pet-header">
+                    <img src="${pet.icon}" alt="${pet.name}">
+                    <span class="pet-name">${pet.name}</span>
+                </div>
+                <div class="pet-info">
+                    <span class="pet-label">Beneficii:</span>
+                    <span class="pet-value">${pet.benefits}</span>
+                </div>
+                <div class="pet-info">
+                    <span class="pet-label">Obtinere:</span>
+                    <span class="pet-value">${pet.obtain}</span>
+                </div>
+            `;
+            petsGrid.appendChild(item);
+        });
+
         // ===== View navigation =====
         const homeView = document.getElementById('homeView');
         const galleryView = document.getElementById('galleryView');
         const specialDropsView = document.getElementById('specialDropsView');
         const bringTheSummerView = document.getElementById('bringTheSummerView');
+        const petsView = document.getElementById('petsView');
         const ticketsView = document.getElementById('ticketsView');
         const ticketDetailView = document.getElementById('ticketDetailView');
         const stuntsView = document.getElementById('stuntsView');
         const coffersView = document.getElementById('coffersView');
         const cofferDetailView = document.getElementById('cofferDetailView');
+        const modpacksView = document.getElementById('modpacksView');
+        const modpackDetailView = document.getElementById('modpackDetailView');
+
+        let viewTransitionTimer = null;
 
         function showView(view) {
+            // Prevent rapid-click race conditions
+            if (viewTransitionTimer) {
+                clearTimeout(viewTransitionTimer);
+                viewTransitionTimer = null;
+            }
+
             // Find the currently active view
-            const currentView = [homeView, galleryView, specialDropsView, bringTheSummerView, ticketsView, ticketDetailView, stuntsView, coffersView, cofferDetailView].find(function (v) {
+            const currentView = [homeView, galleryView, specialDropsView, bringTheSummerView, petsView, ticketsView, ticketDetailView, stuntsView, coffersView, cofferDetailView, modpacksView, modpackDetailView].find(function (v) {
                 return v.classList.contains('active');
             });
+
+            // Reset scroll position
+            window.scrollTo(0, 0);
 
             // If there's a current view and it's not the target, fade it out first
             if (currentView && currentView !== view) {
                 currentView.classList.add('closing');
-                setTimeout(function () {
+                viewTransitionTimer = setTimeout(function () {
                     currentView.classList.remove('active');
                     currentView.classList.remove('closing');
                     view.classList.add('active');
+                    viewTransitionTimer = null;
                 }, 300);
             } else {
                 view.classList.add('active');
@@ -309,6 +472,10 @@
 
         function showBringTheSummer() {
             showView(bringTheSummerView);
+        }
+
+        function showPets() {
+            showView(petsView);
         }
 
         function showTickets() {
@@ -333,6 +500,14 @@
 
         function showHome() {
             showView(homeView);
+        }
+
+        function showModpacks() {
+            showView(modpacksView);
+        }
+
+        function showModpackDetail() {
+            showView(modpackDetailView);
         }
 
         // ===== Skin Tickets =====
@@ -491,9 +666,10 @@
         const ticketDetail = document.getElementById('ticketDetail');
 
         // Generate ticket cards
-        TICKETS.forEach(function (ticket) {
+        TICKETS.forEach(function (ticket, index) {
             const item = document.createElement('div');
-            item.className = 'ticket-card';
+            item.className = 'ticket-card stagger-in';
+            item.style.animationDelay = (index * 0.04) + 's';
             item.innerHTML = `
                 <img class="ticket-icon" src="${ticket.icon}" alt="${ticket.title}">
                 <span class="ticket-name" style="color: ${ticket.color}">${ticket.title}</span>
@@ -583,9 +759,10 @@
         const stuntsContainer = document.getElementById('stuntsContainer');
 
         // Generate stunt cards
-        STUNTS.forEach(function (stunt) {
+        STUNTS.forEach(function (stunt, index) {
             const item = document.createElement('div');
-            item.className = 'stunt-card';
+            item.className = 'stunt-card stagger-in';
+            item.style.animationDelay = (index * 0.02) + 's';
             item.innerHTML = `
                 <span class="stunt-num">Stunt ${stunt.num}</span>
                 <span class="stunt-speed">${stunt.speed}</span>
@@ -691,9 +868,10 @@
         const cofferDetail = document.getElementById('cofferDetail');
 
         // Generate coffer cards
-        COFFERS.forEach(function (coffer) {
+        COFFERS.forEach(function (coffer, index) {
             const item = document.createElement('div');
-            item.className = 'coffer-card';
+            item.className = 'coffer-card stagger-in';
+            item.style.animationDelay = (index * 0.1) + 's';
             item.innerHTML = `
                 <img src="${coffer.img}" alt="${coffer.title}">
                 <span class="coffer-name">${coffer.title}</span>
@@ -720,6 +898,63 @@
             html += '</ul>';
             cofferDetail.innerHTML = html;
             showCofferDetail();
+        }
+
+        // ===== Modpacks =====
+        const modpacksGrid = document.getElementById('modpacksGrid');
+        const modpacksCount = document.getElementById('modpacksCount');
+        const modpackDetailTitle = document.getElementById('modpackDetailTitle');
+        const modpackDetail = document.getElementById('modpackDetail');
+
+        // Set count
+        modpacksCount.textContent = '(' + MODPACKS.length + ' modpack' + (MODPACKS.length === 1 ? '' : 's') + ')';
+
+        // Generate modpack cards
+        MODPACKS.forEach(function (modpack, index) {
+            const item = document.createElement('div');
+            item.className = 'modpack-card stagger-in';
+            item.style.animationDelay = (index * 0.08) + 's';
+            item.innerHTML = `
+                <img class="modpack-icon" src="${modpack.icon}" alt="${modpack.title}">
+                <span class="modpack-name">${modpack.title}</span>
+                <span class="modpack-arrow">→</span>
+            `;
+            item.addEventListener('click', function () {
+                openModpackDetail(modpack);
+            });
+            modpacksGrid.appendChild(item);
+        });
+
+        function openModpackDetail(modpack) {
+            modpackDetailTitle.textContent = modpack.title;
+            let imagesHtml = '';
+            modpack.images.forEach(function (img, imgIndex) {
+                imagesHtml += `
+                    <div class="modpack-image stagger-in" style="animation-delay: ${imgIndex * 0.1}s" onclick="openLightbox('${img}', ${imgIndex + 1})">
+                        <img src="${img}" alt="${modpack.title} - Imagine ${imgIndex + 1}" loading="lazy">
+                    </div>
+                `;
+            });
+            // Convert newlines to <br> for proper multi-line descriptions
+            const descriptionHtml = (modpack.description || '').replace(/\n/g, '<br>');
+            let html = `
+                <div class="modpack-images">
+                    ${imagesHtml}
+                </div>
+                <div class="modpack-info">
+                    <p>${descriptionHtml}</p>
+                </div>
+                <a class="modpack-download-btn" href="${modpack.downloadUrl.trim()}" target="_blank" rel="noopener noreferrer">
+                    <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    ${modpack.downloadLabel || 'Descarcă'}
+                </a>
+            `;
+            modpackDetail.innerHTML = html;
+            showModpackDetail();
         }
 
         // ===== Lightbox =====
@@ -770,7 +1005,12 @@
             lightboxImg.alt = 'Imagine ' + index;
             clearSuppressClick();
             lastTapTime = 0;
-            resetZoom();
+            // Reset zoom without inline transform so the CSS scale animation plays
+            currentZoom = 1;
+            translateX = 0;
+            translateY = 0;
+            lightboxImg.style.transform = '';
+            zoomLevel.textContent = '100%';
             lightbox.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -781,7 +1021,10 @@
             }
             lightbox.classList.remove('open');
             document.body.style.overflow = '';
-            resetZoom();
+            // Reset zoom after the fade-out completes
+            setTimeout(function () {
+                resetZoom();
+            }, 300);
         }
 
         function applyZoom() {

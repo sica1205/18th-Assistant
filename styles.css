@@ -28,6 +28,60 @@ body {
     color: var(--text);
     min-height: 100vh;
     background: #0a0e1a;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* ===== Music & Theme buttons ===== */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-btn {
+    right: 80px;
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.music-btn.playing {
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.music-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    color: var(--text);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.music-icon.hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5) rotate(-90deg);
+    pointer-events: none;
 }
 
 /* ===== Background ===== */
@@ -35,8 +89,22 @@ body {
     position: fixed;
     inset: 0;
     z-index: -2;
-    background: url('img/backgound.png') center / cover no-repeat;
+    background: url('img/backgrounds/backgound.png') center / cover no-repeat;
     filter: blur(8px) brightness(0.55) saturate(1.1);
+}
+
+.bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('img/backgrounds/background_dark.png') center / cover no-repeat;
+    filter: blur(8px) brightness(0.45) saturate(0.8);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode .bg::after {
+    opacity: 1;
 }
 
 .bg-overlay {
@@ -64,6 +132,7 @@ body {
     background: radial-gradient(circle, rgba(0, 212, 255, 0.7), transparent 70%);
     animation: floatUp linear infinite;
     opacity: 0;
+    will-change: transform, opacity;
 }
 
 @keyframes floatUp {
@@ -103,16 +172,30 @@ body {
     width: 100%;
 }
 
-body.initial-load .view.active {
-    animation: fadeSlideUp 0.6s ease forwards;
-}
-
 .view.active {
     display: flex;
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .view.closing {
     animation: fadeOut 0.3s ease forwards;
+}
+
+/* Staggered entrance for grid items */
+.stagger-in {
+    animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+/* GPU acceleration hints */
+.card,
+.gallery-item,
+.ticket-card,
+.pet-card,
+.coffer-card,
+.stunt-card,
+.modpack-card,
+.particle {
+    will-change: transform;
 }
 
 @keyframes fadeOut {
@@ -207,6 +290,91 @@ body.initial-load .subtitle {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ===== Dark Mode ===== */
+body.dark-mode {
+    --glass-bg: rgba(15, 17, 22, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .bg-overlay {
+    background: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.06), transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(123, 47, 247, 0.08), transparent 60%),
+                linear-gradient(180deg, rgba(5, 8, 14, 0.6), rgba(5, 8, 14, 0.85));
+}
+
+body.dark-mode .card,
+body.dark-mode .ticket-card,
+body.dark-mode .pet-card,
+body.dark-mode .coffer-card,
+body.dark-mode .back-btn,
+body.dark-mode .music-btn,
+body.dark-mode .specialdrops-note,
+body.dark-mode .ticket-hero,
+body.dark-mode .coffer-hero,
+body.dark-mode .ticket-info,
+body.dark-mode .rewards-list li,
+body.dark-mode .lightbox-controls,
+body.dark-mode .lightbox .close-lightbox,
+body.dark-mode .gallery-item,
+body.dark-mode .zoom-btn {
+    transition: background-color 0.5s ease,
+                border-color 0.5s ease,
+                box-shadow 0.5s ease,
+                transform 0.3s ease,
+                opacity 0.3s ease;
+}
+
+body.dark-mode .card {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .ticket-card,
+body.dark-mode .pet-card,
+body.dark-mode .stunt-card,
+body.dark-mode .back-btn,
+body.dark-mode .music-btn {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .ticket-hero,
+body.dark-mode .coffer-hero,
+body.dark-mode .specialdrops-note {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .coffer-card {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .ticket-info,
+body.dark-mode .rewards-list li,
+body.dark-mode .pet-info,
+body.dark-mode .gallery-item,
+body.dark-mode .lightbox-controls {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .card:hover {
+    background: rgba(30, 32, 40, 0.9);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+body.dark-mode .card .label,
+body.dark-mode .ticket-card .ticket-name,
+body.dark-mode .pet-card .pet-name,
+body.dark-mode .coffer-card .coffer-name {
+    color: #e0e0e0;
+}
+
+body.dark-mode .footer {
+    color: rgba(255, 255, 255, 0.25);
 }
 
 /* ===== Cards ===== */
@@ -448,6 +616,94 @@ body.initial-load .footer {
     color: var(--text);
 }
 
+.specialdrops-note .note-warning {
+    color: #ff4444;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(255, 68, 68, 0.8);
+}
+
+/* ===== Pets ===== */
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 8px 8px 48px;
+}
+
+.pet-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 22px;
+    border-radius: 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(0, 212, 255, 0.12);
+    border-color: rgba(0, 212, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.pet-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.pet-header img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.pet-card:hover .pet-header img {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.pet-name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+
+.pet-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pet-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.pet-value {
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+}
+
 /* ===== Skin Tickets ===== */
 .tickets-grid {
     display: grid;
@@ -588,10 +844,8 @@ body.initial-load .footer {
     gap: 8px;
     padding: 14px 18px;
     border-radius: 12px;
-    background: var(--glass-bg);
+    background: rgba(10, 14, 26, 0.75);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
@@ -825,12 +1079,186 @@ body.initial-load .footer {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
+/* ===== Modpacks ===== */
+.modpacks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 8px 8px 48px;
+}
+
+.modpack-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.modpack-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(0, 212, 255, 0.12);
+    border-color: rgba(0, 212, 255, 0.4);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.modpack-card .modpack-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.modpack-card:hover .modpack-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.modpack-card .modpack-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+
+.modpack-card .modpack-arrow {
+    font-size: 1rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.modpack-card:hover .modpack-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
+}
+
+/* ===== Modpack Detail ===== */
+.modpack-detail {
+    width: 100%;
+    max-width: 720px;
+    padding: 8px 8px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modpack-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modpack-image {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    aspect-ratio: 16 / 10;
+    cursor: zoom-in;
+}
+
+.modpack-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.modpack-image:hover img {
+    transform: scale(1.05);
+}
+
+.modpack-info {
+    width: 100%;
+    padding: 24px 28px;
+    border-radius: 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.modpack-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.modpack-download-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4);
+    filter: brightness(1.1);
+}
+
+.modpack-download-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.modpack-download-btn .download-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Dark mode modpack styles */
+body.dark-mode .modpack-card,
+body.dark-mode .modpack-image,
+body.dark-mode .modpack-info {
+    background: rgba(15, 16, 20, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .modpack-card:hover {
+    background: rgba(30, 32, 40, 0.9);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+body.dark-mode .modpack-card .modpack-name {
+    color: #e0e0e0;
+}
+
 /* ===== Lightbox ===== */
 .lightbox {
     position: fixed;
     inset: 0;
     z-index: 100;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(5, 8, 15, 0.9);
@@ -838,12 +1266,15 @@ body.initial-load .footer {
     -webkit-backdrop-filter: blur(8px);
     cursor: default;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .lightbox.open {
-    display: flex;
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .lightbox-stage {
@@ -970,6 +1401,10 @@ body.initial-load .footer {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 12px;
     }
+    .modpacks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+    }
     .coffers-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 16px;
@@ -1006,8 +1441,24 @@ body.initial-load .footer {
 }
 
 @media (max-width: 600px) {
+    .music-btn {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+    .theme-btn {
+        right: 64px;
+    }
+    .music-icon {
+        width: 20px;
+        height: 20px;
+    }
     .container {
-        padding: 32px 14px;
+        padding: 180px 14px 32px;
+    }
+    .hero {
+        margin-top: 100px;
     }
     .cards {
         grid-template-columns: 1fr;
@@ -1066,10 +1517,56 @@ body.initial-load .footer {
         font-size: 0.6rem;
         padding: 2px 6px;
     }
+    .pets-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 4px 4px 40px;
+    }
+    .pet-card {
+        padding: 16px 18px;
+        gap: 10px;
+    }
+    .pet-header img {
+        width: 40px;
+        height: 40px;
+    }
+    .pet-name {
+        font-size: 0.9rem;
+    }
+    .pet-value {
+        font-size: 0.82rem;
+    }
     .tickets-grid {
         grid-template-columns: 1fr;
         gap: 10px;
         padding: 4px 4px 40px;
+    }
+    .modpacks-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 4px 4px 40px;
+    }
+    .modpack-card {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    .modpack-card .modpack-icon {
+        width: 36px;
+        height: 36px;
+    }
+    .modpack-card .modpack-name {
+        font-size: 0.85rem;
+    }
+    .modpack-detail {
+        padding: 4px 4px 40px;
+    }
+    .modpack-info {
+        font-size: 0.88rem;
+        padding: 16px 18px;
+    }
+    .modpack-images {
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
     .ticket-card {
         padding: 14px 16px;
