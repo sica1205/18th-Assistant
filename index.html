@@ -24,10 +24,12 @@
     <!-- Background music -->
     <audio id="bgMusic" src="audio/soundtrack1.ogg" loop preload="auto"></audio>
     <button class="music-btn theme-btn" id="themeBtn" onclick="toggleTheme()" title="Dark Mode">
-        <svg class="music-icon theme-icon" id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="music-icon theme-icon" id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
-        <svg class="music-icon theme-icon hidden" id="themeIconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="music-icon theme-icon hidden" id="themeIconSun" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -40,12 +42,14 @@
         </svg>
     </button>
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Mute/Unmute">
-        <svg class="music-icon" id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="music-icon" id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
         </svg>
-        <svg class="music-icon hidden" id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="music-icon hidden" id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <line x1="23" y1="9" x2="17" y2="15"></line>
             <line x1="17" y1="9" x2="23" y2="15"></line>
@@ -114,7 +118,7 @@
                     <span class="arrow">→</span>
                     <img class="icon" src="img/icons/icon8.png" alt="Modpacks">
                     <span class="label">Modpacks</span>
-                    <span class="desc">Descarcă modpacks-urile disponibile pentru o experiență îmbunătățită.</span>
+                    <span class="desc">Aici găsești modpack-uri atent selectate, verificate și testate înainte de a fi puse la dispoziția voastră.</span>
                 </a>
             </div>
 
@@ -185,7 +189,8 @@
                 <h2>Viteze Stunts</h2>
                 <button class="back-btn" onclick="showHome()">← Înapoi</button>
             </div>
-            <div class="specialdrops-note">📌<span class="note-warning">CITESTE:</span> Vitezele sunt orientative, NU exacte. Fiecare mașină se comportă
+            <div class="specialdrops-note">📌<span class="note-warning">CITESTE:</span> Vitezele sunt orientative, NU
+                exacte. Fiecare mașină se comportă
                 diferit, în special din cauza handling-ului, așa că viteza necesară poate varia de la un vehicul la
                 altul. Valorile afișate sunt DOAR un punct de referință pentru stunt și NU trebuie luate ca valori
                 fixe sau exacte. Dacă la voi funcționează o viteză puțin diferită, e perfect normal — nu înseamnă că
@@ -217,6 +222,14 @@
             <div class="gallery-header">
                 <h2>Modpacks [SeraNNo's Workplace] <span class="count" id="modpacksCount"></span></h2>
                 <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">
+                <p style="margin-bottom: 10px;">📌<span class="note-warning">CITESTE:</span> Moduri pentru toate tipurile de PC-uri, de la Low-End până la High-End. 🔥</p>
+                <p style="margin-bottom: 10px;">🛠️ Modurile postate sunt testate și folosite personal de către <span style="color: #00d4ff; font-weight: 600;">SeraNNo</span>.</p>
+                <p style="margin-bottom: 10px;">⚡ Optimizări, performanță, grafică și multe altele — tot ce ai nevoie pentru un gameplay mai bun!</p>
+                <p style="margin-bottom: 30px;"></p>
+                <p style="margin-bottom: 10px;">📌 <span class="note-warning">Odată cu trecerea pe FiveM, modpack-urile actuale vor deveni incompatibile.</span></p>
+                <p>Vom căuta și pregăti variante noi compatibile cu FiveM, așa că stay tuned! 🎯</p>
             </div>
             <div class="modpacks-grid" id="modpacksGrid"></div>
         </div>
@@ -432,6 +445,7 @@
         const modpackDetailView = document.getElementById('modpackDetailView');
 
         let viewTransitionTimer = null;
+        const scrollPositions = {};
 
         function showView(view) {
             // Prevent rapid-click race conditions
@@ -445,8 +459,10 @@
                 return v.classList.contains('active');
             });
 
-            // Reset scroll position
-            window.scrollTo(0, 0);
+            // Save the current scroll position for the view we're leaving
+            if (currentView && currentView !== view) {
+                scrollPositions[currentView.id] = window.scrollY;
+            }
 
             // If there's a current view and it's not the target, fade it out first
             if (currentView && currentView !== view) {
@@ -456,9 +472,17 @@
                     currentView.classList.remove('closing');
                     view.classList.add('active');
                     viewTransitionTimer = null;
+                    // Restore the saved scroll position for the target view
+                    if (scrollPositions[view.id] !== undefined) {
+                        window.scrollTo(0, scrollPositions[view.id]);
+                    }
                 }, 300);
             } else {
                 view.classList.add('active');
+                // Restore the saved scroll position for the target view
+                if (scrollPositions[view.id] !== undefined) {
+                    window.scrollTo(0, scrollPositions[view.id]);
+                }
             }
         }
 
