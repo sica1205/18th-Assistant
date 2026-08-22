@@ -1,63 +1,96 @@
 // ===== Background music =====
+
 const bgMusic = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 const musicIconOn = document.getElementById('musicIconOn');
 const musicIconOff = document.getElementById('musicIconOff');
-let musicPlaying = false;
-let autoplayStarted = false;
 
-// Volume control - adjust this value between 0.0 (silent) and 1.0 (full blast)
-const MUSIC_VOLUME = 0.02;
+const MUSIC_VOLUME = 0.04;
 
 bgMusic.volume = MUSIC_VOLUME;
 
-function setMusicPlaying(isPlaying) {
-    musicPlaying = isPlaying;
-    if (isPlaying) {
-        musicBtn.classList.add('playing');
-        musicIconOn.classList.remove('hidden');
-        musicIconOff.classList.add('hidden');
-    } else {
-        musicBtn.classList.remove('playing');
-        musicIconOn.classList.add('hidden');
-        musicIconOff.classList.remove('hidden');
+
+// ===== UI =====
+
+function updateMusicUI() {
+    const isPlaying = !bgMusic.paused;
+
+    musicBtn.classList.toggle('playing', isPlaying);
+    musicIconOn.classList.toggle('hidden', !isPlaying);
+    musicIconOff.classList.toggle('hidden', isPlaying);
+}
+
+
+// ===== Play =====
+
+async function playMusic() {
+    try {
+        await bgMusic.play();
+        updateMusicUI();
+        return true;
+    } catch (error) {
+        updateMusicUI();
+        return false;
     }
 }
 
-function toggleMusic() {
-    if (musicPlaying) {
+
+// ===== Mute / Unmute button =====
+
+async function toggleMusic() {
+    if (bgMusic.paused) {
+        await playMusic();
+    } else {
         bgMusic.pause();
-        setMusicPlaying(false);
-    } else {
-        bgMusic.play();
-        setMusicPlaying(true);
+        updateMusicUI();
     }
 }
 
-// Start music on the first user interaction with the page
-// (browsers block autoplay with sound until the user clicks/taps/keypresses)
-function tryAutoplay() {
-    if (autoplayStarted) return;
-    autoplayStarted = true;
 
-    bgMusic.play().then(function () {
-        setMusicPlaying(true);
-    }).catch(function () {
-        // Still blocked - user must press the music button
-        setMusicPlaying(false);
-    });
+// ===== Autoplay =====
 
-    // Remove listeners after the first attempt
-    document.removeEventListener('click', tryAutoplay);
-    document.removeEventListener('touchstart', tryAutoplay);
-    document.removeEventListener('keydown', tryAutoplay);
-    document.removeEventListener('scroll', tryAutoplay);
+// Încercăm o singură dată autoplay direct.
+playMusic().then(function (started) {
+    if (started) {
+        removeInteractionListeners();
+    }
+});
+
+
+// ===== Fallback la prima interacțiune =====
+
+async function startMusicOnInteraction(event) {
+
+    // Dacă utilizatorul a apăsat chiar butonul de muzică,
+    // lăsăm toggleMusic() să se ocupe de tot.
+    if (event.target.closest('#musicBtn')) {
+        return;
+    }
+
+    const started = await playMusic();
+
+    if (started) {
+        removeInteractionListeners();
+    }
 }
 
-// Try to start music on any user gesture
-document.addEventListener('click', tryAutoplay);
-document.addEventListener('touchstart', tryAutoplay);
-document.addEventListener('keydown', tryAutoplay);
 
-// Also try to start on scroll (some browsers allow it after scrolling)
-document.addEventListener('scroll', tryAutoplay, { passive: true });
+function removeInteractionListeners() {
+    document.removeEventListener('pointerdown', startMusicOnInteraction);
+    document.removeEventListener('keydown', startMusicOnInteraction);
+}
+
+
+// pointerdown acoperă mouse + touch + stylus
+document.addEventListener('pointerdown', startMusicOnInteraction);
+
+// fallback pentru tastatură
+document.addEventListener('keydown', startMusicOnInteraction);
+
+
+// ===== Keep UI synced =====
+
+bgMusic.addEventListener('play', updateMusicUI);
+bgMusic.addEventListener('pause', updateMusicUI);
+
+updateMusicUI();
