@@ -68,6 +68,20 @@ body {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
+/* ===== Performance button ===== */
+.perf-btn {
+    right: 140px;
+}
+
+.perf-btn.active {
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+body.perf-on .particles {
+    display: none;
+}
+
 .music-icon {
     position: absolute;
     top: 50%;
@@ -90,7 +104,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: -2;
-    background: url('img/backgrounds/backgound.png') center / cover no-repeat;
+    background: url('img/backgrounds/backgound.webp') center / cover no-repeat;
     filter: blur(8px) brightness(0.55) saturate(1.1);
 }
 
@@ -98,7 +112,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('img/backgrounds/background_dark.png') center / cover no-repeat;
+    background: url('img/backgrounds/background_dark.webp') center / cover no-repeat;
     filter: blur(8px) brightness(0.52) saturate(0.8);
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -136,6 +150,25 @@ body.dark-mode .bg::after {
     animation: floatUp linear infinite;
     opacity: 0;
     will-change: transform, opacity;
+}
+
+/* ===== Easter egg particle colors ===== */
+body.egg-seranno .particle {
+    background: radial-gradient(circle, rgba(255, 45, 45, 0.9), transparent 70%);
+}
+
+body.egg-popricasu .particle {
+    background: radial-gradient(circle, rgba(60, 255, 110, 0.9), transparent 70%);
+}
+
+/* Popricasu's egg also swaps the background to vielau easter art. */
+body.egg-popricasu .bg {
+    background: url('img/backgrounds/easter1.webp') center / cover no-repeat;
+}
+
+/* Keep the easter art fully visible even in dark mode. */
+body.egg-popricasu .bg::after {
+    opacity: 0;
 }
 
 @keyframes floatUp {
@@ -190,18 +223,6 @@ body.dark-mode .bg::after {
 /* Staggered entrance for grid items */
 .stagger-in {
     animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
-}
-
-/* GPU acceleration hints */
-.card,
-.gallery-item,
-.ticket-card,
-.pet-card,
-.coffer-card,
-.stunt-card,
-.modpack-card,
-.particle {
-    will-change: transform;
 }
 
 @keyframes fadeOut {
@@ -1551,6 +1572,10 @@ body.about-open .about-clan {
 .team-member {
     width: 130px;
     text-align: center;
+    cursor: pointer;
+    /* Make rapid taps register as individual clicks on mobile and stop
+       double-tap-to-zoom interfering with the 5-tap easter egg counter. */
+    touch-action: manipulation;
 }
 
 .team-member img {
@@ -1723,6 +1748,10 @@ body.about-locked {
 
     .theme-btn {
         right: 64px;
+    }
+
+    .perf-btn {
+        right: 116px;
     }
 
     .music-icon {

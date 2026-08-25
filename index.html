@@ -55,6 +55,18 @@
             <line x1="17" y1="9" x2="23" y2="15"></line>
         </svg>
     </button>
+    <button class="music-btn perf-btn" id="perfBtn" onclick="togglePerformance()" title="Performance Mode">
+        <svg class="music-icon" id="perfIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14-4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+        </svg>
+        <svg class="music-icon hidden" id="perfIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14 4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+        </svg>
+    </button>
 
     <!-- ===== Home View ===== -->
     <div class="container">
@@ -158,7 +170,7 @@
 
                         <div class="team-grid">
 
-                            <div class="team-member">
+                            <div class="team-member" data-egg="sica12">
                                 <img src="img/avatar/avatar1.png">
                                 <h4
                                     style="color: #ff8fcf; text-shadow: 0 0 6px rgba(255, 143, 207, 0.65), 0 0 14px rgba(255, 143, 207, 0.30);">
@@ -178,7 +190,7 @@
                                     proiectul să prindă o formă. (Cică.)</span>
                             </div>
 
-                            <div class="team-member">
+                            <div class="team-member" data-egg="seranno">
                                 <img src="img/avatar/avatar3.png">
                                 <h4
                                     style="color: #4da6ff; text-shadow: 0 0 6px rgba(77, 166, 255, 0.65), 0 0 14px rgba(77, 166, 255, 0.30);">
@@ -188,7 +200,7 @@
                                     noi.</span>
                             </div>
 
-                            <div class="team-member">
+                            <div class="team-member" data-egg="popricasu">
                                 <img src="img/avatar/avatar4.png">
                                 <h4
                                     style="color: #42b883; text-shadow: 0 0 6px rgba(66, 184, 131, 0.60), 0 0 14px rgba(66, 184, 131, 0.28);">
@@ -271,7 +283,7 @@
                 altul. Valorile afișate sunt DOAR un punct de referință pentru stunt și NU trebuie luate ca valori
                 fixe sau exacte. Dacă la voi funcționează o viteză puțin diferită, e perfect normal — nu înseamnă că
                 viteza afișată este greșită.
-                .</div>
+            </div>
             <div class="stunts-container" id="stuntsContainer"></div>
         </div>
 
@@ -339,7 +351,9 @@
     </div>
 
     <script src="js/theme.js"></script>
+    <script src="js/easteregg.js"></script>
     <script src="js/music.js"></script>
+    <script src="js/performance.js"></script>
     <script src="js/modpacks.js"></script>
     <script>
         if ('scrollRestoration' in history) {
@@ -377,7 +391,7 @@
         // ===== Gallery =====
         const TOTAL_IMAGES = 33;
         const TOTAL_REAL_IMAGES = 33;
-        const PLACEHOLDER_IMG = 'img/backgrounds/backgound.png';
+        const PLACEHOLDER_IMG = 'img/backgrounds/backgound.webp';
 
         const galleryGrid = document.getElementById('galleryGrid');
 
