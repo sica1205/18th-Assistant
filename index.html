@@ -56,8 +56,8 @@
         </svg>
     </button>
     <button class="music-btn perf-btn" id="perfBtn" onclick="togglePerformance()" title="Performance Mode">
-        <svg class="music-icon" id="perfIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="music-icon" id="perfIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="m12 14-4-4"></path>
             <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
         </svg>
@@ -145,12 +145,12 @@
                     18th Street Gang &copy; 2026 — All Rights Reserved.
                 </div>
                 <button class="about-scroll-btn" onclick="scrollToAbout()" aria-label="Despre 18th Street Gang">
-                    ⏷
+                    ▼
                 </button>
             </div>
             <section class="about-clan" id="aboutClan">
                 <button class="about-back-btn" onclick="scrollBackHome()" aria-label="Înapoi la meniu">
-                    ⏶
+                    ▲
                 </button>
                 <div class="about-clan-inner">
                     <span class="about-eyebrow">18th Street Gang</span>
@@ -376,16 +376,40 @@
         const particlesContainer = document.getElementById('particles');
         const particleCount = 30;
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 6 + 3;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
-            particle.style.animationDelay = (Math.random() * 10) + 's';
-            particlesContainer.appendChild(particle);
+        function createParticles() {
+            if (!particlesContainer) return;
+
+            // Don't create duplicates
+            if (particlesContainer.children.length > 0) return;
+
+            // Performance Mode ON = don't create anything
+            if (localStorage.getItem('18th-perf') === 'on') return;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const size = Math.random() * 7 + 4;
+
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function destroyParticles() {
+            if (!particlesContainer) return;
+
+            particlesContainer.replaceChildren();
+        }
+
+        // Only create them if Performance Mode is OFF
+        if (localStorage.getItem('18th-perf') !== 'on') {
+            createParticles();
         }
 
         // ===== Gallery =====
