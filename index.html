@@ -171,7 +171,8 @@
                         <div class="team-grid">
 
                             <div class="team-member" data-egg="sica12">
-                                <img src="img/avatar/avatar1.png">
+                                <img src="img/avatar/avatar1.gif" data-gif="img/avatar/avatar1.gif"
+                                    data-static="img/avatar/avatar1.webp">
                                 <h4
                                     style="color: #ff8fcf; text-shadow: 0 0 6px rgba(255, 143, 207, 0.65), 0 0 14px rgba(255, 143, 207, 0.30);">
                                     Sica12
@@ -181,7 +182,8 @@
                             </div>
 
                             <div class="team-member">
-                                <img src="img/avatar/avatar2.png">
+                                <img src="img/avatar/avatar2.gif" data-gif="img/avatar/avatar2.gif"
+                                    data-static="img/avatar/avatar2.webp">
                                 <h4
                                     style="color: #ff5c5c; text-shadow: 0 0 6px rgba(255, 92, 92, 0.65), 0 0 14px rgba(255, 92, 92, 0.30);">
                                     Yang2k
@@ -191,7 +193,8 @@
                             </div>
 
                             <div class="team-member" data-egg="seranno">
-                                <img src="img/avatar/avatar3.png">
+                                <img src="img/avatar/avatar3.gif" data-gif="img/avatar/avatar3.gif"
+                                    data-static="img/avatar/avatar3.webp">
                                 <h4
                                     style="color: #4da6ff; text-shadow: 0 0 6px rgba(77, 166, 255, 0.65), 0 0 14px rgba(77, 166, 255, 0.30);">
                                     SeraNNo
@@ -201,7 +204,8 @@
                             </div>
 
                             <div class="team-member" data-egg="popricasu">
-                                <img src="img/avatar/avatar4.png">
+                                <img src="img/avatar/avatar4.gif" data-gif="img/avatar/avatar4.gif"
+                                    data-static="img/avatar/avatar4.webp">
                                 <h4
                                     style="color: #42b883; text-shadow: 0 0 6px rgba(66, 184, 131, 0.60), 0 0 14px rgba(66, 184, 131, 0.28);">
                                     Popricasu
@@ -1485,13 +1489,14 @@
 
             requestAnimationFrame(function () {
                 const aboutClan = document.getElementById('aboutClan');
-
-                const targetY =
-                    window.scrollY +
-                    aboutClan.getBoundingClientRect().top;
+                const targetY = window.scrollY + aboutClan.getBoundingClientRect().top;
 
                 animateScrollTo(targetY, 650, function () {
                     document.body.classList.add('about-locked');
+
+                    // Abia acum apare butonul ▲
+                    document.body.classList.add('about-ready');
+
                     aboutTransitioning = false;
                 });
             });
@@ -1501,6 +1506,9 @@
             if (aboutTransitioning) return;
 
             aboutTransitioning = true;
+
+            // Ascunde ▲ imediat când îl apeși
+            document.body.classList.remove('about-ready');
             document.body.classList.remove('about-locked');
 
             animateScrollTo(0, 650, function () {

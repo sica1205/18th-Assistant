@@ -1468,6 +1468,21 @@ body.about-open .about-scroll-btn {
     transform: translateY(10px) scale(0.9);
 }
 
+body.about-open.about-ready .about-back-btn {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+body.about-open.about-closing .about-back-btn {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px) scale(0.9);
+    animation: none;
+}
+
 @keyframes aboutArrowFloat {
 
     0%,
@@ -1623,13 +1638,6 @@ body.about-open .about-clan {
         box-shadow 0.3s ease,
         opacity 0.2s ease,
         transform 0.2s ease;
-}
-
-body.about-open .about-back-btn {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0) scale(1);
 }
 
 .about-back-btn:hover {
