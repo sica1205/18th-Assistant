@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18th Web ⟡ Clan Hub</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="initial-load">
+    <!-- Background -->
+    <div class="bg"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" src="audio/soundtrack1.ogg" loop preload="auto"></audio>
+    <button class="music-btn theme-btn" id="themeBtn" onclick="toggleTheme()" title="Dark Mode">
+        <svg class="music-icon theme-icon" id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="music-icon theme-icon hidden" id="themeIconSun" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Mute/Unmute">
+        <svg class="music-icon" id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg class="music-icon hidden" id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+    </button>
+    <button class="music-btn perf-btn" id="perfBtn" onclick="togglePerformance()" title="Performance Mode">
+        <svg class="music-icon" id="perfIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14-4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+        </svg>
+        <svg class="music-icon hidden" id="perfIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14 4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+        </svg>
+    </button>
+
+    <!-- ===== Home View ===== -->
+    <div class="container">
+        <div class="view active" id="homeView">
+            <div class="home-panel">
+                <div class="hero">
+                    <h1 class="title">
+                        <span class="brand">18<span class="th">th</span> Street Gang</span> — Ghiduri & Resurse
+                    </h1>
+
+                    <p class="subtitle">
+                        Un scroll până jos n-ar strica, dacă tot ești aici.
+                        <span class="wave">👀</span>
+                        <span class="last-updated">
+                            [ Ultima actualizare: <span class="update-date">01.09.2026, 22:16</span> ]
+                        </span>
+                    </p>
+                </div>
+
+                <div class="cards">
+                    <a class="card" data-alert="false" onclick="showGallery()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon1.png" alt="Locatii Poze">
+                        <span class="label">Locații Poze</span>
+                        <span class="desc">Aici sunt toate locațiile pozelor pentru quest.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showStunts()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon2.png" alt="Viteze Stunts">
+                        <span class="label">Viteze Stunts</span>
+                        <span class="desc">Valorile sunt orientative și pot varia în funcție de execuția
+                            stunt-ului.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showTickets()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon3.png" alt="Informatii Skin Tickets">
+                        <span class="label">Informații Skin Tickets</span>
+                        <span class="desc">Tot ce trebuie să știi despre Skin Tickets și ce oferă fiecare ticket in
+                            parte.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showCoffers()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon4.png"
+                            alt="Informatii despre Hunter's / Fisherman's Coffer">
+                        <span class="label">Informații despre Hunter's / Fisherman's Coffer</span>
+                        <span class="desc">Aici găsiți lista completă a premiilor disponibile pentru fiecare
+                            Coffer.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showSpecialDrops()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon5.png" alt="Locații Special Drops">
+                        <span class="label">Locații Special Drops</span>
+                        <span class="desc">Locațiile prezente aici sunt doar o parte dintre cele în care pot apărea
+                            Special
+                            Drops.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showBringTheSummer()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon6.png" alt="Locații Bring The Summer">
+                        <span class="label">Locații Bring The Summer</span>
+                        <span class="desc">Locațiile reprezintă pozițiile NPC-urilor cărora trebuie să le oferi
+                            berea.</span>
+                    </a>
+                    <a class="card" data-alert="false" onclick="showPets()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon7.png" alt="Informatii Pets">
+                        <span class="label">Informații Pets</span>
+                        <span class="desc">Toate informațiile despre pets și beneficiile lor.</span>
+                    </a>
+                    <a class="card" data-alert="true" onclick="showModpacks()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon8.png" alt="Modpacks">
+                        <span class="label">Moduri FiveM</span>
+                        <span class="desc">
+                            Modpack-urile vechi pentru <strong style="font-weight: 900;">RAGE:MP</strong> nu sunt
+                            compatibile cu
+                            <strong style="font-weight: 900;">FiveM</strong>. Necesită adaptare pentru a putea fi
+                            utilizate.
+                        </span>
+                    </a>
+                    <a class="card" data-alert="true" onclick="showFixes()">
+                        <span class="arrow">→</span>
+                        <img class="icon" src="img/icons/icon9.png" alt="Fixes">
+                        <span class="label">Rezolvări Crash-uri & Performanță</span>
+                        <span class="desc">
+                            <strong style="font-weight: 900;">Nu</strong> garantează eliminarea completă a crash-urilor
+                            și a problemelor de performanță, dar pot reduce frecvența acestora.
+                        </span>
+                    </a>
+                </div>
+
+                <div class="footer">
+                    <div class="footer-main">
+                        18th Street Gang &copy; 2026 — All Rights Reserved. (maybe)
+                    </div>
+
+                    <div class="footer-build">
+                        ver v1.5.1 · build #2
+                    </div>
+                </div>
+
+                <button class="about-scroll-btn" onclick="scrollToAbout()" aria-label="Despre 18th Street Gang">
+                    ▼
+                </button>
+            </div>
+            <section class="about-clan" id="aboutClan">
+                <button class="about-back-btn" onclick="scrollBackHome()" aria-label="Înapoi la meniu">
+                    ▲
+                </button>
+                <div class="about-clan-inner">
+                    <span class="about-eyebrow">18th Street Gang</span>
+
+                    <h2>
+                        Care-i treaba cu acest site?
+                    </h2>
+
+                    <span class="site-created">
+                        [ Data creării site-ului:
+                        <span class="created-date">18.08.2026, 22:51</span> ]
+                    </span>
+
+                    <div class="about-text">
+                        <p>
+                            Totul a pornit de la două canale de Discord în care strângeam ghiduri, informații și alte
+                            lucruri utile pentru clan. Își făceau treaba, dar Discord-ul vine și cu limitele lui: nu
+                            prea ai
+                            libertate în felul în care organizezi și prezinți informațiile, iar pe măsură ce se adunau
+                            tot
+                            mai multe, devenea clar că putem face ceva mai bun.
+                        </p>
+
+                        <p>
+                            Așa a apărut site-ul. Ideea a fost să păstrăm tot ce era util, dar într-o formă mai ușor de
+                            accesat, mai bine organizată și, evident, ceva mai fancy.
+                        </p>
+
+                        <p>
+                            📌 Canalele de Discord sunt încă acolo și continuăm să le actualizăm. Până la urmă, nu
+                            judecăm
+                            —
+                            fiecare folosește varianta care îi este mai la îndemână.
+                        </p>
+
+                        <p class="about-suggestions">
+                            Ai o idee sau o sugestie pentru site? Las-o pe Discord, în secțiunea de sugestii sau direct
+                            pe
+                            chat. Orice idee e binevenită, iar <strong>sugestiile bune care ajung implementate vor fi
+                                <span class="reward-text">recompensate</span>!</strong>
+                        </p>
+                    </div>
+
+                    <div class="team-section">
+                        <h3 class="team-title">Băieții Grei</h3>
+                        <p class="team-subtitle">Oamenii responsabili de pornirea acestei obrăznicături.</p>
+
+                        <div class="team-grid">
+
+                            <div class="team-member" data-egg="sica12">
+                                <img src="img/avatar/avatar1.gif" data-gif="img/avatar/avatar1.gif"
+                                    data-static="img/avatar/avatar1.webp">
+                                <h4
+                                    style="color: #ff8fcf; text-shadow: 0 0 6px rgba(255, 143, 207, 0.65), 0 0 14px rgba(255, 143, 207, 0.30);">
+                                    Sica12
+                                </h4>
+                                <span class="team-role">Responsabil de dezvoltarea site-ului.</span>
+                            </div>
+
+                            <div class="team-member">
+                                <img src="img/avatar/avatar2.gif" data-gif="img/avatar/avatar2.gif"
+                                    data-static="img/avatar/avatar2.webp">
+                                <h4
+                                    style="color: #ff5c5c; text-shadow: 0 0 6px rgba(255, 92, 92, 0.65), 0 0 14px rgba(255, 92, 92, 0.30);">
+                                    Yang2k
+                                </h4>
+                                <span class="team-role">Omul cu părerile proaste, ideile și feedback-ul care au ajutat
+                                    proiectul să prindă o formă.</span>
+                            </div>
+
+                            <div class="team-member" data-egg="seranno">
+                                <img src="img/avatar/avatar3.gif" data-gif="img/avatar/avatar3.gif"
+                                    data-static="img/avatar/avatar3.webp">
+                                <h4
+                                    style="color: #4da6ff; text-shadow: 0 0 6px rgba(77, 166, 255, 0.65), 0 0 14px rgba(77, 166, 255, 0.30);">
+                                    SeraNNo
+                                </h4>
+                                <span class="team-role">Responsabil de modpack-uri, resurse și conținut testat pentru
+                                    noi.</span>
+                            </div>
+
+                            <div class="team-member" data-egg="b0gdem">
+                                <img src="img/avatar/avatar5.gif" data-gif="img/avatar/avatar5.gif"
+                                    data-static="img/avatar/avatar5.webp">
+                                <h4
+                                    style="color: #b266ff; text-shadow: 0 0 6px rgba(178, 102, 255, 0.65), 0 0 14px rgba(178, 102, 255, 0.30);">
+                                    b0gdEm
+                                </h4>
+                                <span class="team-role">Un alt domn respectabil cu idei benefice, mofturi și critici
+                                    constructive.</span>
+                            </div>
+
+                            <div class="team-member" data-egg="popricasu">
+                                <img src="img/avatar/avatar4.gif" data-gif="img/avatar/avatar4.gif"
+                                    data-static="img/avatar/avatar4.webp">
+                                <h4
+                                    style="color: #42b883; text-shadow: 0 0 6px rgba(66, 184, 131, 0.60), 0 0 14px rgba(66, 184, 131, 0.28);">
+                                    Popricasu
+                                </h4>
+                                <span class="team-role">Liderul nostru. Nu face prea multe.</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== Gallery View ===== -->
+        <div class="view" id="galleryView">
+            <div class="gallery-header">
+                <h2>Locatii Poze <span class="count">(33 imagini)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+
+        <!-- ===== Special Drops View ===== -->
+        <div class="view" id="specialDropsView">
+            <div class="gallery-header">
+                <h2>Locații Special Drops <span class="count">(1 imagine)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">📌Pentru Special Drops, folosiți /sett 0 și /setw clear pentru o vizualizare
+                mai bună a obiectelor.</div>
+            <div class="gallery-grid" id="specialDropsGrid"></div>
+        </div>
+
+        <!-- ===== Bring The Summer View ===== -->
+        <div class="view" id="bringTheSummerView">
+            <div class="gallery-header">
+                <h2>Locații Bring The Summer <span class="count">(1 imagine)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="gallery-grid" id="bringTheSummerGrid"></div>
+        </div>
+
+        <!-- ===== Pets View ===== -->
+        <div class="view" id="petsView">
+            <div class="gallery-header">
+                <h2>Informații Pets <span class="count">(6 pets)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="pets-grid" id="petsGrid"></div>
+        </div>
+
+        <!-- ===== Skin Tickets View ===== -->
+        <div class="view" id="ticketsView">
+            <div class="gallery-header">
+                <h2>Informații Skin Tickets <span class="count">(21 tickete)</span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="tickets-grid" id="ticketsGrid"></div>
+        </div>
+
+        <!-- ===== Ticket Detail View ===== -->
+        <div class="view" id="ticketDetailView">
+            <div class="gallery-header">
+                <h2 id="ticketDetailTitle">Ticket</h2>
+                <button class="back-btn" onclick="showTickets()">← Înapoi</button>
+            </div>
+            <div class="ticket-detail" id="ticketDetail"></div>
+        </div>
+
+        <!-- ===== Stunts View ===== -->
+        <div class="view" id="stuntsView">
+            <div class="gallery-header">
+                <h2>Viteze Stunts</h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">📌<span class="note-warning">CITESTE:</span> Vitezele sunt orientative, NU
+                exacte. Fiecare mașină se comportă
+                diferit, în special din cauza handling-ului, așa că viteza necesară poate varia de la un vehicul la
+                altul. Valorile afișate sunt DOAR un punct de referință pentru stunt și NU trebuie luate ca valori
+                fixe sau exacte. Dacă la voi funcționează o viteză puțin diferită, e perfect normal — nu înseamnă că
+                viteza afișată este greșită.
+            </div>
+            <div class="stunts-container" id="stuntsContainer"></div>
+        </div>
+
+        <!-- ===== FiveM Fixes View ===== -->
+        <div class="view" id="fixesView">
+            <div class="gallery-header">
+                <h2>Rezolvări Crash-uri & Performanță</h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+
+            <div class="fixes-container" id="fixesContainer"></div>
+        </div>
+
+        <!-- ===== Coffers View ===== -->
+        <div class="view" id="coffersView">
+            <div class="gallery-header">
+                <h2>Informații Coffers</h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="coffers-grid" id="coffersGrid"></div>
+        </div>
+
+        <!-- ===== Coffer Detail View ===== -->
+        <div class="view" id="cofferDetailView">
+            <div class="gallery-header">
+                <h2 id="cofferTitle">Coffer</h2>
+                <button class="back-btn" onclick="showCoffers()">← Înapoi</button>
+            </div>
+            <div class="coffer-detail" id="cofferDetail"></div>
+        </div>
+
+        <!-- ===== Modpacks View ===== -->
+        <div class="view" id="modpacksView">
+            <div class="gallery-header">
+                <h2>Moduri [SeraNNo's Workplace] <span class="count" id="modpacksCount"></span></h2>
+                <button class="back-btn" onclick="showHome()">← Înapoi</button>
+            </div>
+            <div class="specialdrops-note">
+                <p style="margin-bottom: 10px;">📌<span class="note-warning">CITESTE:</span> Moduri pentru toate
+                    tipurile de PC-uri, de la Low-End până la High-End. 🔥</p>
+                <p style="margin-bottom: 10px;">🛠️ Modurile postate sunt testate și folosite personal de către <span
+                        style="color: #00d4ff; font-weight: 600;">SeraNNo</span>.</p>
+                <p style="margin-bottom: 10px;">⚡ Optimizări, performanță, grafică și multe altele — tot ce ai nevoie
+                    pentru un gameplay mai bun!</p>
+                <p style="margin-bottom: 30px;"></p>
+                <p style="margin-bottom: 10px;">📌 <span class="note-warning">În urma tranziției serverului de la
+                        RAGE:MP la FiveM, modpack-urile pentru RAGE:MP nu sunt compatibile și nu pot fi utilizate.
+                        Acestea vor rămâne în continuare disponibile pentru cei care doresc să adapteze
+                        anumite fișiere din ele sau să încerce adaptarea întregului modpack pentru FiveM.
+                    </span></p>
+                <p>Vom încerca, unde este posibil, să găsim
+                    variante compatibile sau să vedem dacă pot fi adaptate. Nu promitem însă nimic — nici că toate vor
+                    putea fi adaptate,
+                    nici că vom găsi alternative potrivite. Totuși, stay tuned! 🎯
+
+                </p>
+            </div>
+
+            <div id="modpacksCategories"></div>
+
+        </div>
+
+        <!-- ===== Modpack Detail View ===== -->
+        <div class="view" id="modpackDetailView">
+            <div class="gallery-header">
+                <h2 id="modpackDetailTitle">Modpack</h2>
+                <button class="back-btn" onclick="showModpacks()">← Înapoi</button>
+            </div>
+            <div class="modpack-detail" id="modpackDetail"></div>
+        </div>
+    </div>
+
+    <!-- ===== Lightbox ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="close-lightbox" onclick="closeLightbox(event)">×</span>
+        <div class="lightbox-stage" id="lightboxStage">
+            <img id="lightboxImg" src="" alt="Imagine mărită" draggable="false">
+        </div>
+        <div class="lightbox-controls" onclick="event.stopPropagation()">
+            <button class="zoom-btn" onclick="zoomLightbox(-1)" title="Micșorează">−</button>
+            <span class="zoom-level" id="zoomLevel">100%</span>
+            <button class="zoom-btn" onclick="zoomLightbox(1)" title="Mărește">+</button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Resetează">⟲</button>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/easteregg.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/performance.js"></script>
+    <script src="js/modpacks.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/fixes.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/pets.js"></script>
+    <script src="js/tickets.js"></script>
+    <script src="js/stunts.js"></script>
+    <script src="js/coffers.js"></script>
+    <script src="js/modpacks-ui.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/about.js"></script>
+
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.addEventListener('load', function () {
+            window.scrollTo(0, 0);
+        });
+        // ===== Initial load animation =====
+        window.addEventListener('load', function () {
+            // Remove the initial-load class after the staggered animations finish
+            // (longest delay: 1.8s + 1s duration = 2.8s)
+            setTimeout(function () {
+                document.body.classList.remove('initial-load');
+            }, 2900);
+        });
+
+
+        function showGallery() {
+            showView(galleryView);
+        }
+
+        function showSpecialDrops() {
+            showView(specialDropsView);
+        }
+
+        function showBringTheSummer() {
+            showView(bringTheSummerView);
+        }
+
+        function showPets() {
+            showView(petsView);
+        }
+
+        function showTickets() {
+            showView(ticketsView);
+        }
+
+        function showTicketDetail() {
+            showView(ticketDetailView);
+        }
+
+        function showStunts() {
+            showView(stuntsView);
+        }
+
+        function showCoffers() {
+            showView(coffersView);
+        }
+
+        function showCofferDetail() {
+            showView(cofferDetailView);
+        }
+
+        function showHome() {
+            showView(homeView);
+        }
+
+        function showModpacks() {
+            showView(modpacksView);
+        }
+
+        function showModpackDetail() {
+            showView(modpackDetailView);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
