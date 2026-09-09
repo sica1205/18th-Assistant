@@ -51,7 +51,7 @@ Exemplu:
 ⚠️ Notă:
 ✅ Mod testat și folosit personal înainte de publicare.
 Dacă aveți deja alte moduri de cer instalate, este recomandat să le eliminați înainte pentru a evita eventualele conflicte.`,
-        downloadUrl: 'https://cdn.discordapp.com/attachments/1534988893534027906/1546577868648353882/Nebula_Sky.zip?ex=6aa0f321&is=6a9fa1a1&hm=0be2c52836a2a4da32fec86668f6204ba207f2094b4cf36fb38fabfb38713602&',
+        downloadUrl: 'https://drive.google.com/drive/folders/164olIfBJ5wDxvBHys55NJt-7fZCcG9fZ?usp=drive_link',
         downloadLabel: 'Descarcă Aici'
     },
     {
@@ -72,8 +72,8 @@ Dacă aveți deja alte moduri de cer instalate, este recomandat să le eliminaț
 Modul este foarte bine optimizat, astfel încât să nu provoace scăderi semnificative de FPS și să păstreze o experiență smooth în timpul jocului.
 
 📖 Instalare:
-🛠️ 1. Descărcați și deschideți arhiva Sky Montain.
-📂 2. Extrageți conținutul arhivei (din folder-ul Sky Montain) în folderul:
+🛠️ 1. Descărcați și deschideți arhiva Sky Mountain.
+📂 2. Extrageți conținutul arhivei (din folder-ul Sky Mountain) în folderul:
 
 » C:\\Users\\NUMELE-TAU\\AppData\\Local\\FiveM\\FiveM Application Data
 📌 „NUMELE-TAU” reprezintă username-ul contului vostru de Windows.
@@ -86,7 +86,7 @@ Exemplu:
 ⚠️ Notă:
 ✅ Mod testat și folosit personal înainte de publicare.
 Dacă aveți deja alte moduri de cer instalate, este recomandat să le eliminați înainte pentru a evita eventualele conflicte.`,
-        downloadUrl: 'https://cdn.discordapp.com/attachments/1534988893534027906/1546578478462144634/Sky_Montain.rar?ex=6aa0f3b3&is=6a9fa233&hm=019789dcb817cd350a35647f5568e56ff493f5fb0b0a089fa9050b9a5c8e1fdc&',
+        downloadUrl: 'https://drive.google.com/drive/folders/1fBqmNPNGwjHWdRklhzevBO-gkHVHb2VX?usp=drive_link',
         downloadLabel: 'Descarcă Aici'
     },
     {
@@ -123,7 +123,7 @@ Exemplu:
 ⚠️ Notă:
 ✅ Mod testat și folosit personal înainte de publicare.
 Dacă aveți deja alte moduri de cer instalate, este recomandat să le eliminați înainte pentru a evita eventualele conflicte.`,
-        downloadUrl: 'https://cdn.discordapp.com/attachments/1534988893534027906/1546578956654739616/Northen_Light.zip?ex=6aa0f425&is=6a9fa2a5&hm=0566c55ee00648fc23766324a249cb0ab122fbf168e7088f9c3f39b88778aa15&',
+        downloadUrl: 'https://drive.google.com/drive/folders/1P3Tis_hOVD9TO2Gk8FGAblyF9Dxm3eXp?usp=drive_link',
         downloadLabel: 'Descarcă Aici'
     },
     {
@@ -173,7 +173,7 @@ Exemplu:
 ⚠️ Notă:
 ✅ Modpack testat și folosit personal înainte de publicare.
 🎮 După instalare, porniți FiveM și vă puteți bucura de Mafia Modpack.`,
-        downloadUrl: 'https://cdn.discordapp.com/attachments/1534988893534027906/1546605787122761788/mafii8.rar?ex=6aa10d22&is=6a9fbba2&hm=6e19a0a8feb5d784449ef6a9bde85f859c7d1af9a5be6c431cf2bd23c510420a&',
+        downloadUrl: 'https://drive.google.com/drive/folders/1RWe7oJrSutcJPhZzQVwOW-e115RkxHdU?usp=drive_link',
         downloadLabel: 'Descarcă Aici'
     },
     {
