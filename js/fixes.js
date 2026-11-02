@@ -553,7 +553,7 @@ if (fixDetailContainer) {
 
                             <div class="fix-settings-row">
                                 <span>MSAA</span>
-                                <strong>x4</strong>
+                                <strong>x2</strong>
                             </div>
 
                             <div class="fix-settings-row">
@@ -583,12 +583,12 @@ if (fixDetailContainer) {
 
                             <div class="fix-settings-row">
                                 <span>Extended Texture Budget</span>
-                                <strong>Maxim</strong>
+                                <strong>Mai mult de jumate (sau Maxim)</strong>
                             </div>
 
                             <div class="fix-settings-row">
                                 <span>Texture Quality</span>
-                                <strong>Normal</strong>
+                                <strong>High (sau Normal)</strong>
                             </div>
 
                             <div class="fix-settings-row">
@@ -608,7 +608,7 @@ if (fixDetailContainer) {
 
                             <div class="fix-settings-row">
                                 <span>Reflection MSAA</span>
-                                <strong>x8</strong>
+                                <strong>x2</strong>
                             </div>
 
                             <div class="fix-settings-row">

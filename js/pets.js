@@ -1,51 +1,77 @@
-        // ===== Pets =====
-        const PETS = [
-            {
-                name: 'Parrot',
-                icon: 'img/pets/Parrot.png',
-                benefits: 'Acest Pet nu oferă beneficii',
-                obtain: 'Spring Shop (2026)'
-            },
-            {
-                name: 'Lovely Bunny',
-                icon: 'img/pets/Lovely-Bunny.png',
-                benefits: '1 Premium Point per PayDay',
-                obtain: 'Easter V4 Crate'
-            },
-            {
-                name: 'Kuruni',
-                icon: 'img/pets/Kuruni.png',
-                benefits: '10% Rob Boost',
-                obtain: 'Easter Crate V4'
-            },
-            {
-                name: 'Fluffy Bunny',
-                icon: 'img/pets/Fluffy-bunny.png',
-                benefits: '1 Free Spin la PayDay (la 3550+ secunde)',
-                obtain: 'Spring Shop (2026)'
-            },
-            {
-                name: 'Evil Bunny',
-                icon: 'img/pets/Evil-bunny.png',
-                benefits: '+1 Rob Point/Free Point la PayDay (dacă nu deții deja limita maximă)',
-                obtain: 'Spring Shop (2026)'
-            },
-            {
-                name: 'Easter Bunny',
-                icon: 'img/pets/Easter-Bunny.png',
-                benefits: '10% Job Boost',
-                obtain: 'Easter V4 Crate'
-            }
-        ];
+// ===== Pets =====
+const PETS = [
+    {
+        name: 'Parrot',
+        icon: 'img/pets/Parrot.png',
+        benefits: 'Acest Pet nu oferă beneficii',
+        obtain: 'Spring Shop (2026)'
+    },
+    {
+        name: 'Lovely Bunny',
+        icon: 'img/pets/Lovely-Bunny.png',
+        benefits: '1 Premium Point per PayDay',
+        obtain: 'Easter V4 Crate'
+    },
+    {
+        name: 'Kuruni',
+        icon: 'img/pets/Kuruni.png',
+        benefits: '10% Rob Boost',
+        obtain: 'Easter Crate V4'
+    },
+    {
+        name: 'Fluffy Bunny',
+        icon: 'img/pets/Fluffy-bunny.png',
+        benefits: '1 Free Spin la PayDay (la 3550+ secunde)',
+        obtain: 'Spring Shop (2026)'
+    },
+    {
+        name: 'Evil Bunny',
+        icon: 'img/pets/Evil-bunny.png',
+        benefits: '+1 Rob Point/Free Point la PayDay (dacă nu deții deja limita maximă)',
+        obtain: 'Spring Shop (2026)'
+    },
+    {
+        name: 'Easter Bunny',
+        icon: 'img/pets/Easter-Bunny.png',
+        benefits: '10% Job Boost',
+        obtain: 'Easter V4 Crate'
+    },
+    ///NEW PETS
+    {
+        name: 'Fantomă',
+        icon: 'img/pets/Phantom.png',
+        benefits: '1 Premium Point per PayDay',
+        obtain: 'Cripta Blestemată Crate'
+    },
+    {
+        name: 'Micul Secerator',
+        icon: 'img/pets/Little-Reaper.png',
+        benefits: '1 Premium Point per PayDay',
+        obtain: 'Cripta Blestemată Crate'
+    },
+    {
+        name: 'Liliacul Regal',
+        icon: 'img/pets/Regal-Bat.png',
+        benefits: '2 Premium Point per PayDay',
+        obtain: 'Cripta Blestemată Crate'
+    },
+    {
+        name: 'Demonul Coasei',
+        icon: 'img/pets/Scythe-Demon.png',
+        benefits: '3 Premium Point per PayDay',
+        obtain: 'Cripta Blestemată Crate'
+    }
 
-        const petsGrid = document.getElementById('petsGrid');
+];
 
-        // Generate pet cards
-        PETS.forEach(function (pet, index) {
-            const item = document.createElement('div');
-            item.className = 'pet-card stagger-in';
-            item.style.animationDelay = (index * 0.08) + 's';
-            item.innerHTML = `
+const petsGrid = document.getElementById('petsGrid');
+
+// Generate pet cards
+PETS.forEach(function (pet, index) {
+    const item = document.createElement('div');
+    item.className = 'pet-card stagger-in';
+    item.style.animationDelay = (index * 0.08) + 's';
+    item.innerHTML = `
                 <div class="pet-header">
                     <img src="${pet.icon}" alt="${pet.name}">
                     <span class="pet-name">${pet.name}</span>
@@ -59,5 +85,5 @@
                     <span class="pet-value">${pet.obtain}</span>
                 </div>
             `;
-            petsGrid.appendChild(item);
-        });
+    petsGrid.appendChild(item);
+});

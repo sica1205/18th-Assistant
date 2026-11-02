@@ -10,6 +10,7 @@ const coffersView = document.getElementById('coffersView');
 const cofferDetailView = document.getElementById('cofferDetailView');
 const modpacksView = document.getElementById('modpacksView');
 const modpackDetailView = document.getElementById('modpackDetailView');
+const seraGptView = document.getElementById('seraGptView');
 
 let viewTransitionTimer = null;
 const scrollPositions = {};
@@ -23,7 +24,7 @@ function showView(view) {
 
     // Find the currently active view
     const currentView = [homeView, petsView, ticketsView, ticketDetailView, stuntsView, fixesView, fixDetailView, coffersView, cofferDetailView,
-        modpacksView, modpackDetailView].find(function (v) {
+        modpacksView, modpackDetailView, seraGptView].find(function (v) {
         return v.classList.contains('active');
     });
 
