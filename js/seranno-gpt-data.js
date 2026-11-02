@@ -9,7 +9,7 @@
 //   answer   – răspunsul afișat în chat (\n = linie nouă)
 //
 
-const SERA_GPT_GREETING = 'Bine ai venit! Pune o întrebare sau introdu un cuvânt-cheie, iar bot-ul va încerca să-ți ofere informația de care ai nevoie.';
+const SERA_GPT_GREETING = 'Bine ai venit! Pune o întrebare sau introdu un cuvânt-cheie, iar eu voi încerca să-ți ofer informația de care ai nevoie.';
 
 // ===== Matching: toate pragurile sunt folosite efectiv de motor =====
 const SERA_GPT_MATCH_MIN = 38;           // sub acest scor nu sugerăm topicul
@@ -129,7 +129,8 @@ const SERA_GPT_BAD_WORDS = [
 // Răspunsurile botului când userul folosește cuvinte din listă
 const SERA_GPT_LANGUAGE_REPLIES = [
     'Băi puștiule!!!',
-    'Dacă întrebi ceva Fară să înjuri, te pot ajuta.',
+    'Băi ăsta. Te-n câcat cu mana.',
+    'Dacă întrebi ceva fară să înjuri, te pot ajuta.',
     'Încearcă din nou, mai elegant dacă se poate.',
     'Să te duci acolo unde a dus mutul iapa.',
     'Băi mânca-mi-ai..',
