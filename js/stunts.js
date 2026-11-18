@@ -39,7 +39,7 @@ const STUNTS = [
     { num: 37, speed: '140 km/h', updated: false },
     { num: 38, speed: '80 km/h', updated: false },
     { num: 39, speed: '110 km/h', updated: false },
-    { num: 40, speed: '120 km/h', updated true, problematic: true },
+    { num: 40, speed: '120 km/h', updated: true, problematic: true },
     { num: 41, speed: '160 km/h', updated: false },
     { num: 42, speed: '95 km/h', updated: false },
     { num: 43, speed: '140 km/h', updated: true },
