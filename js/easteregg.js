@@ -3,7 +3,6 @@
     const TRACKS = {
         sica12: { file: 'soundtrack1.ogg' },
         seranno: { file: 'soundtrack2.ogg' },
-        popricasu: { file: 'soundtrack3.ogg' },
         b0gdem: { file: 'soundtrack5.ogg' },
         yang2k: { file: 'soundtrack4.ogg' },
         blank: { file: 'soundtrack6.ogg' }
@@ -92,7 +91,6 @@
     // Sets the particle color for the active egg on <body>:
     function applyEggVisuals(egg) {
         document.body.classList.toggle('egg-seranno', egg === 'seranno');
-        document.body.classList.toggle('egg-popricasu', egg === 'popricasu');
         document.body.classList.toggle('egg-b0gdem', egg === 'b0gdem');
         document.body.classList.toggle('egg-yang2k', egg === 'yang2k');
     }
